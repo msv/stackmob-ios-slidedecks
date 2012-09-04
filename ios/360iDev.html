@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushXml.js"></script>
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushJava.js"></script>
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushObjC.js"></script>
 		 
 		<link href="../syntaxhighlighter/styles/shCoreMidnight.css" rel="stylesheet" type="text/css" />
 		<link href="../syntaxhighlighter/styles/shThemeMidnight.css" rel="stylesheet" type="text/css" />
@@ -141,6 +142,16 @@
 	top: 20px;
 	left: 20px;
 }
+
+.big50 { font-size: 50px;}
+.big75 { font-size: 75px;}
+.big100 { font-size: 100px;}
+.top15 { margin-top: 15px; }
+.top25 { margin-top: 25px; }
+.top35 { margin-top: 35px; }
+.top50 { margin-top: 50px; }
+.top75 { margin-top: 75px; }
+.top100 { margin-top: 100px; }
 		</style>
 		
 	</head>
@@ -165,56 +176,132 @@
 						<h3>@_mattvaz</h3>
 						<p><a href="http://www.stackmob.com"><img src="../images/stackmob_logo.png"/></a></p>
 					</section>
-				
+				</section>
+				<section>
+						<h2>So, have you used Core Data?</h2>
+						<img src="../images/CoreDataPic.png">
+				</section>		
+				<section>
+						<h2>What was it like before?</h2>
+						
+						<section>
+						<img src="../images/restfulwebservices.png">
+						</section>	
+				</section>
 				<section>
 						<h2>What problem are we trying to solve?</h2>
 						
-						<ul>
-							<li>Want to improve the experience of using a mobile development platform</li>
-							<li>What existing iOS knowledge can we leverage?</li>
-							<li>Core Data</li>
-							<li>sqlite --> StackMob</li>
-							<li>Incremental Store</li>
-						</ul>	
+						<section>
+						<p class="big50 top75">Improve the experience of using a mobile development platform.</p>
+						</section>
+						<section>
+						<p class="big50 top75">What existing iOS knowledge can we leverage?</p>
+						</section>
+						<section>
+						<p class="big50 top75">Core Data?</p>
+						</section>
+						<section>
+						<p class="top50"><img src="../images/sqlite370_banner.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/stackmob_logo.png"></p>
+						</section>
+						<section>
+						<p class="big75 top75">NSIncrementalStore!</p>
+						</section>
 				</section>
 				
 				<section>
 						<h2>Core Data Overview</h2>
 						
-						<ul>
-							<li>What is it used for?</li>
-							<li>How does it work</li>
-							<li>NSManagedObjectContext</li>
-							<li>NSPersistentStoreCoordinator</li>
-							<li>NSManagedObjectModel</li>
-						</ul>
+						<section>
+						<p class="big50 top75">&ldquo;Core Data is an object graph and persistence framework provided by Apple.&rdquo;</p>
+						</section>
+						
+						<section>
+						<p class="big50 top50">Data Model &rarr; NSManagedObjectModel</p>
+						<p><img src="../images/core-data-model.png"></p>
+						</section>
+						
+						<section>
+						<p class="big50 top25">NSManagedObjectModel &amp;</p>
+						<p class="big50 top25">Persistent Store Type</p>
+						<p class="big50 top25">&darr;</p>
+						<p class="big75 top50">NSPersistentStoreCoordinator</p>
+						</section>
+						
+						<section>
+						<p class="top50">hasChanges&nbsp;&nbsp;mergePolicy&nbsp;&nbsp;deleteObject:&nbsp;&nbsp;undo:&nbsp;&nbsp;performBlock:</p>
+						<p class="top75 big75">NSManagedObjectContext</p>
+						<p class="top75">insertObject:&nbsp;&nbsp;updatedObjects&nbsp;&nbsp;save:&nbsp;&nbsp;undo:&nbsp;&nbsp;refreshObject:</p>
+						</section>
+						
+						<section>
+						<p class="big50 top50">NSManagedObjectContext</p>
+						<p class="big50 top25">&uarr; &darr;</p>
+						<p class="big50 top25">NSPersistentStoreCoordinator</p>
+						<p class="big50 top25">&uarr; &darr;</p>
+						<p class="big50 top25"><img src="../images/stackmob_logo.png"></p>
+						</section>
 				</section>
 				
 				<section>
-						<h2>NSIncrementalStore Introduction</h2>
+						<h2>NSIncrementalStore</h2>
 						
-						<ul>
-							<li>What is it used for?</li>
-							<li>How does it work</li>
-							<li>How does it differ from an atomic store</li>
-						</ul>
+						<section>
+						<p class="big50 top75">&ldquo;...an abstract superclass defining the API through which Core Data communicates with a store.&rdquo;</p>
+						</section>
+						<section>
+						<p class="big50 top50">Incremental Store vs. Atomic Store</p>
+						<p><img src="../images/boxing-gloves.jpeg"></p>
+						</section>
+						<section>
+						<p><img src="../images/mobile-evolution.gif"></p>
+						</section>	
 				</section>
 				
 				<section>
-						<h2>Methods to override</h2>
+						<h2>Methods to Override</h2>
 						
-						<ul>
+						<section class="top50">
+						<ul class="big50">
+							<li><strong>loadMetadata:</strong></li>
+						</ul>
+						</section>
+						<section class="top50">
+						<ul class="big50">
 							<li>loadMetadata:</li>
-							<li>executeRequest:WithContext:error</li>
-							<li>newValuesForObjectWithID:withContext:error</li>
-							<li>newValuesForRelationship:forObjectWithID:withContext:error</li>
-							<li>obtainPermanentIDsForObjects:error</li>
-							<li>There is no need to override the methods that you must otherwise override for a subclass of NSPersistentStore.</li>
+							<li class="top25"><strong>executeRequest:WithContext:error:</strong></li>
 						</ul>
+						</section>
+						<section class="top50">
+						<ul class="big50">
+							<li>loadMetadata:</li>
+							<li class="top25">executeRequest:WithContext:error:</li>
+							<li class="top25"><strong>obtainPermanentIDsForObjects:error:</strong></li>
+						</ul>
+						</section>
+						<section class="top50">
+						<ul class="big50">
+							<li>loadMetadata:</li>
+							<li class="top25">executeRequest:WithContext:error:</li>
+							<li class="top25">obtainPermanentIDsForObjects:error:</li>
+							<li class="top25"><strong>newValuesForObjectWithID:withContext:error:</strong></li>
+						</ul>
+						</section>
+						<section class="top50">
+						<ul class="big50">
+							<li>loadMetadata:</li>
+							<li class="top25">executeRequest:WithContext:error:</li>
+							<li class="top25">obtainPermanentIDsForObjects:error:</li>
+							<li class="top25">newValuesForObjectWithID:withContext:error:</li>
+							<li class="top25"><strong>newValuesForRelationship:forObjectWithID:<br />&nbsp;&nbsp;&nbsp;&nbsp;withContext:error:</strong></li>
+						</ul>
+						</section>
 				</section>
 				
 				<section>
 						<h2>Details of implementation</h2>
+						<pre><code class="brush: objc; toolbar: false;">
+						[[NSString string dkfjdfk];
+						</code></pre>
 				</section>
 				
 				<section>
@@ -232,8 +319,7 @@
 						<h2>What's next?</h2>
 						
 						<ul>
-							<li>Offline Sync - What's the plan</li>
-							<li>Constant iteration</li>
+							<li>Phase 2: Offline Sync</li>
 						</ul>
 				</section>
 				
@@ -242,725 +328,20 @@
 						
 						<p>Give the resources for stackmob ios sdk</p>
 				</section>
-						  
+				
 				<section>
-						<h2>DONE</h2>
-						
-						<section>
-						</section>
-						
-						<section>
-						<h3>Database</h3>
-						<img src="https://dl.dropbox.com/u/79464649/oracle.jpg" />
-						<img src="https://dl.dropbox.com/u/79464649/mysql-big.gif" />					
-						</section>
-						
-						<section>
-						<h3>Hardware</h3>
-						<img src="https://dl.dropbox.com/u/79464649/300px-Dell_Logo.svg_1.png" />
-						<img src="https://dl.dropbox.com/u/79464649/intel-logo-300x198.jpg" />
-						</section>
-						
-						<section>
-						<h3>Cloud Store</h3>
-						<img src="https://dl.dropbox.com/u/79464649/amazon.png" />
-						<img src="https://dl.dropbox.com/u/79464649/iCloud.png" />
-						</section>
-						
-						<section>
-						<h3>Software Layer</h3>
-						<img src="https://dl.dropbox.com/u/79464649/heroku.jpg" />
-						<img src="https://dl.dropbox.com/u/79464649/appengine-logo.png" />
-						</section>
-						
-						
-				</section>	
-						
-				<section>
-						<h2>NSIncrementalStore</h2>
-						
+						<h2>Images Sources</h2>
 						<ul>
-							<li>Mobile Backend Platform</li>
-							<li>Lowering barrier of entry</li>
-							<li>Focus on your user experience.</li>
-							<li>Access to "big company" backend power.</li>
-							<li>Develop. Scale. Analytics. Revisioning.</li>
+							<li>restfulwebservices.png - http://www.trachtenberg.com/blog/2006/11/06/rest-vs-httppox-vs-soap/</li>
+							<li>sqlite370_banner.gif - http://www.sqlite.org/index.html/</li>
+							<li>core-data-model.png - http://www.cod3r.com/2009/05/working-with-core-data/</li>
+							<li>boxing-gloves.jpeg - http://waggeneredstrom.com/blog/2012/06/07/cause-marketing-v-corporate-philanthropy/</li>
+							<li>mobile-evolution.gif - http://www.celtnet.org.uk/mobile-phone/mobile-phone-information.html</li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
 						</ul>
-						
-				</section>
-				
-				<section>
-						<h2>SMIncrementalStore</h2>
-						
-						<p>We've powered apps:</p>
-						<ul>
-							<li>Featured in the AppStore</li>
-							<li>Top 20 in the AppStore</li>
-							<li>TechCrunch Disrupt</li>
-							<li>SXSW</li>
-							<li>Won Startup Weekend</li>
-							<li>Atari</li>
-						</ul>
-						<p>Games, Enterprise Apps, Social... </p>
-						<p>iOS, Android, JavaScript, Ruby, PHP, Python, Java</p>
-				</section>
-				
-				<section>
-				  		<h2>The First App You Ever Built</h2>
-				  		<p>
-				  		<img src="https://dl.dropbox.com/u/79464649/helloWorld.png"/>
-				  		</p>
-				</section>
-				  
-				<section>
-				  		<h2>NSUserDefaults</h2>
-				  		<p>
-				  		<img src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
-				  		</p>
-				</section>
-				  
-				<section>
-						<h2>The Next Level</h2>
-						
-						<ul>
-				  			<li>Access Data From Multiple Devices.</li>
-				  			<li>Lots of Features == Lots of Data.</li>
-				  		</ul>
-				</section>
-				
-				<section>
-						<h2>I could do it myself</h2>
-						
-						<img src="https://dl.dropbox.com/u/79464649/headInHands.jpg" />
-				</section>
-					
-				<section>
-						<h2>Focus on your user experience!</h2>
-						
-						<img src="https://dl.dropbox.com/u/79464649/awesome_note.png" />
-				</section>
-				
-				<section>
-						<h2>Configure StackMob iOS SDK</h2>
-						
-						<h3>StackMobConfiguration.h</h3>
-						<pre><code class="brush: xml">
-						#define STACKMOB_PUBLIC_KEY         @"YOUR_PUBLIC_KEY"
-						#define STACKMOB_PRIVATE_KEY        @"YOUR_PRIVATE_KEY"
-						#define STACKMOB_APP_NAME           @"YOUR_APP_NAME"
-						#define STACKMOB_UDID_SALT          @"UDID"
-						#define STACKMOB_APP_DOMAIN         @"stackmob.com"
-						#define STACKMOB_APP_MOB            @"mob1"
-						#define STACKMOB_USER_OBJECT_NAME   @"user"
-						#define STACKMOB_API_VERSION        0
-						</code></pre>
-						
-						<h3>AppDelegate.h (or any other file)</h3>
-						<pre><code class="brush: xml">
-						#import "StackMob.h"
-						</code></pre>
-				</section>
-
-					
-				<section>
-						<h2>Initialize</h2>
-
-						<pre><code class="brush: javascript; highlight: [5]">
-						- (BOOL)application:(UIApplication *)application 
-						didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
-						{
-
-						[[StackMob stackmob] startSession];
-
-						[self.window makeKeyAndVisible];
-						return YES;
-
-
-						}
-						</code></pre>
-
-						<pre><code class="brush: javascript; highlight: [3]">
-						- (void)applicationWillTerminate:(UIApplication *)application
-						{   
-    					[[StackMob stackmob] endSession];
-						}
-						</code></pre>
-						
-				</section>
-					
-										
-				<section>
-						<h2>Server-Side Persistence: Create</h2>
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: javascript;">
-
-						// define schema
-						NSString *schemaName = @"blogentry"
-
-						// define field/value pairs and contain in a dictionary
-						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"rich text", @"content", nil];
-
-						[[StackMob stackmob] post:schemaName withArguments:args 
-						andCallback:MyCallback];
-						
-						</code></pre>
-
-					</section>
-					
-					<section>
-							<h2>Let's try it out!</h2>
-					</section>
-						
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: javascript; highlight: [2]">
-
-						// define schema
-						NSString *schemaName = @"blogentry"
-
-						// define field/value pairs and contain in a dictionary
-						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"rich text", @"content", nil];
-
-						[[StackMob stackmob] post:schemaName withArguments:args 
-						andCallback:MyCallback];
-						
-						</code></pre>
-
-					</section>
-					
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: javascript; highlight: [5, 6]">
-
-						// define schema
-						NSString *schemaName = @"blogentry"
-
-						// define field/value pairs and contain in a dictionary
-						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"rich text", @"content", nil];
-
-						[[StackMob stackmob] post:schemaName withArguments:args 
-						andCallback:MyCallback];
-						
-						</code></pre>
-
-					</section>
-					
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: javascript; highlight: [8, 9]">
-
-						// define schema
-						NSString *schemaName = @"blogentry"
-
-						// define field/value pairs and contain in a dictionary
-						NSDictionary *args = [[NSDictionary alloc] initWithObjectsAndKeys:
-							@"rich text", @"content", nil];
-
-						[[StackMob stackmob] post:schemaName withArguments:args 
-						andCallback:MyCallback];
-						
-						</code></pre>
-
-					</section>
-						
-					<section>
-						<a href="javascript:void(0);">Callback:</a>
-						<pre><code class="brush: javascript;">
-						[[StackMob stackmob] post:schemaName withArguments:args 
-						andCallback:^(BOOL success, id result){
-						if(success){
-                        
-        				// We can get the response body of the newly created object 
-        				// in NSDictionary form 
-        				NSDictionary *resultDict = (NSDictionary *)result;
-        				[self updateUI:resultDict];
-                        
-        				} else {
-        				// Action after a call results in error
-        				}
-    					}];
-						</code></pre>
-
-					</section>						
-
-
-					<section>
-							<h2>Aw yeah! Backend Created!</h2>
-	
-							<p>
-							<img src="http://dl.dropbox.com/u/9289507/joy.gif" alt=""/>
-							</p>
-					</section>
-
-				</section>
-
-
-				<section>
-						
-					<h2>Read from DB</h2>
-					<a href="javascript:void(0);">Read Item</a>
-					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"blogentry";
-					NSString objectId = @"1234";
-
-					[[StackMob stackmob] get:[NSString stringWithFormat:@"%@/%@",
-						schemaName, objectID] withCallback:myCallBack];
-	</code></pre>
-						
-				</section>
-				
-				<section>
-					
-					<h2>Update DB</h2>
-					<a href="javascript:void(0);">Update Item</a>
-					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"blogentry"
-					NSString objectId = @"1234";
-
-					// define field/value pairs and contain in a dictionary
-					NSDictionary *args = [[NSDictionary alloc] 
-						initWithObjectsAndValues:@"some other stuff", @"content"];
-
-					[[StackMob stackmob] put:schemaName withID:objectId andArguments:args 
-						andCallback:myCallback];
-</code></pre>
-					
-				</section>
-						
-				<section>
-					<h2>Delete from DB</h2>
-					<a href="javascript:void(0);">Delete Item</a>
-					<pre><code class="brush: javascript;">
-					NSString *schemaName = @"blogentry"
-
-					// define field/value pairs and contain in a dictionary
-					NSDictionary *args = [[NSDictionary alloc] 
-						initWithObjectsAndKeys:@"1234", @"blogentry_id"];
-
-					[[StackMob stackmob] destroy:schemaName withArguments:args 
-						andCallback:myCallback];
-</code></pre>
-					
-				</section>
-				
-				<section>
-					<h2>WOOHOO for CRUD!</h2>
-					<img src="https://dl.dropbox.com/u/79464649/homer_woohoo.jpg" />
-				</section>
-				
-				<section>
-						<h2>But I want more than just a datastore in the cloud!</h2>
-						
-						<ul>
-				  			<li>Queries</li>
-				  			<li>Relate this object to that object</li>
-							<li>User Authentication</li>
-							<li>Push Notifications</li>
-							<li><img src="../images/f_logo.png"/>
-								<img src="../images/twitter_logo.png"/>
-							</li>
-				  		</ul>
-				</section>					
-					
-					
-				<section>
-						<h2>Queries</h2>
-						
-						<section>
-						<img src="https://dl.dropbox.com/u/79464649/massiveData_dr-evil.jpg" />
-						
-						</section>
-						
-						<section>
-							<h3>Field Selection</h3>
-							<pre><code class="brush: javascript;">
-							StackMobQuery *q = [StackMobQuery query];
-							[q setSelectionToFields:[NSArray arrayWithObjects:@"username", @"age", nil]];
- 
-							// perform the query and handle the results
-							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>Equality</h3>
-							<pre><code class="brush: javascript;">
-							StackMobQuery *q = [StackMobQuery query];
-							[q field:@"age" mustEqualValue:25];
-
-							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>Order By</h3>
-							<pre><code class="brush: javascript;">
-							StackMobQuery *q = [StackMobQuery query];
-							[q orderByField:@"createddate" withDirection:SMOrderDescending];
-							[q orderByField:@"age" withDirection:SMOrderAscending];
- 
-
-							[[StackMob stackmob] get:@"user" withQuery:q andCallback:myQueryCallback];
-							</code></pre>
-						</section>
-						
-						
-				</section>
-				
-				<section>
-						<h2>Relationships</h2>
-						<section>
-						<img src="https://dl.dropbox.com/u/79464649/holdingHands.jpg" />
-						
-						</section>
-						
-						<section>
-							<pre><code class="brush: javascript;">
-							{
-								user: john
-								todos: [1, 2]
-							}
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>POST - Creating</h3>
-							<pre><code class="brush: javascript; highlight: [1, 2]">
-							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 1", @"action", @"high", @"priority", nil];
-							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 2", @"action", @"low", @"priority", nil];
-							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
-
-							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
-								andBulkArguments:items andCallback:myCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>POST - Creating</h3>
-							<pre><code class="brush: javascript; highlight: [3, 4]">
-							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 1", @"action", @"high", @"priority", nil];
-							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 2", @"action", @"low", @"priority", nil];
-							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
-
-							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
-								andBulkArguments:items andCallback:myCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>POST - Creating</h3>
-							<pre><code class="brush: javascript; highlight: [5]">
-							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 1", @"action", @"high", @"priority", nil];
-							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 2", @"action", @"low", @"priority", nil];
-							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
-
-							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
-								andBulkArguments:items andCallback:myCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>POST - Creating</h3>
-							<pre><code class="brush: javascript; highlight: [7, 8]">
-							NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 1", @"action", @"high", @"priority", nil];
-							NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:
-								@"my todo 2", @"action", @"low", @"priority", nil];
-							NSArray *items = [NSArray arrayWithObjects:item1, item2, nil];
-
-							[[StackMob stackmob] post:@"user" withId:@"john" andField:@"todos" 
-								andBulkArguments:items andCallback:myCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<p>Result from a GET on user/john</p>
-							<pre><code class="brush: javascript;">
-							{
-								user: john
-								todos: [1, 2]
-							}
-							</code></pre>
-						</section>
-						
-						<section>
-							<h3>GET - Expansion</h3>
-							<pre><code class="brush: javascript;">
-							StackMobQuery *q = [StackMobQuery query];
-							[q setExpandDepth:1];
- 
-							[[StackMob stackmob] get:@"user/john" withQuery:q andCallback:myCallback];
-							</code></pre>
-						</section>
-						
-						<section>
-							<pre><code class="brush: javascript;">
-							{
-								user: john
-								todos: [
-											{
-												todo_id: 1
-												action: "my todo 1"
-												priority: "high"
-											}
-											{
-												todo_id: 2
-												action: "my todo 2"
-												priority: "low"
-											}
-									   ]
-							}
-							</code></pre>
-						</section>
-						
-				</section>
-				
-				<section>
-						<h2>User Authentication</h2>
-						<section>
-						<img src="http://dl.dropbox.com/u/77348001/calving_hobbes_password.gif" alt=""/>
-						</section>
-				
-						<section>
-							<h3>Create User & Login</h2>
-							<pre><code class="brush: javascript;">
-							NSString *username = @"[USERNAME]"
-							NSString *password = @"[PASSWORD]"
-							NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:
-								username, @"username", password, @"password", nil];
- 
-							[[StackMob stackmob] loginWithArguments:args andCallback:loginCallback];
-							</code></pre>			
-						</section>
-						
-						<section>
-							<h3>Password Management</h3>
-							<ul>
-								<li>Forgotten Passwords</li>
-								<li>Reset Password</li>
-							</ul>
-						
-						</section>
-				</section>
-				<!--		
-				<section>
-						<h2>Security &rarr; OAuth 2.0</h2>
-					
-					<ul>
-						<li>Industry Standard: OAuth 1.0/2.0</li>
-						<li>Public/Private Keys identify your app's requests</li>
-						<li>FB/Twitter: OAuth 2.0.  Username/Password</li>
-						<li>In current JS SDK for pre-trials</li>
-					</ul>
-					
-				</section>
-					-->
-				<section>
-						<h2>Access Controls</h2>
-						<ul>
-							<li>Share objects to certain users</li>
-							<li>Limit visibility</li>
-							<li>Coming very very soon</li>
-						</ul>
-				</section>
-				
-				
-				<section>
-					
-					<section>
-						<h2>Even more flexibility: Custom Code</h2>
-						<ul>
-							<li>Java/Scala Server Side SDK</li>
-							<li>Write Code - StackMob REST-ifies it</li>
-							<li>iOS can execute server code via REST API!</li>
-							<li>iOS receives your custom JSON response too</li>
-						</ul>
-					</section>
-					
-					<section>
-						<h2>Call Custom Code from iOS App!</h2>
-						<pre><code class="brush: javascript;">
-						[[StackMob stackmob] get:@"hello_world" withCallback:^(BOOL success, id result) {
-    						if (success) {
-       						 // result is the JSON as an NSDictionary of "msg" vs. "Hello, world!"
-    						} else {
-    						}
-						}];
-						</code></pre>						
-					</section>
-											
-					<section>
-						<h2>Custom Code Example</h2>
-						
-<pre><code class="brush: java">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  
-  @Override
-  public String getMethodName() {
-    return "hello_world";
-  }
-  
-  @Override
-  public ResponseToProcess execute(...) {
-     
-    //Do fancy server side things
-    
-    Map&lt;String, String&gt; json = 
-    	new HashMap&lt;String, String&gt;();
-    json.put("msg", "hello world!");
-    return new ResponseToProcess(..., json);
-  }
-}
-</code></pre>						
-					</section>	
-					
-					<section>
-						<h2>Defines your REST endpoint</h2>
-						<p><code>http://api.mob1.stackmob.com/hello_world</code></p>
-<pre><code class="brush: java; highlight: [6]">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  
-  @Override
-  public String getMethodName() {
-    return "hello_world";
-  }
-  
-  ...
-}
-</code></pre>							
-					</section>
-						
-					<section>
-						<h2>Defines your return JSON</h2>
-						<p><code>{ msg: "hello world!" }</code></p>
-<pre><code class="brush: java; highlight: [11]">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  ...
-   @Override
-  public ResponseToProcess execute(...) {
-     
-    //Do fancy server side things
-    
-    Map&lt;String, String&gt; json = 
-    	new HashMap&lt;String, String&gt;();
-    json.put("msg", "hello world!");
-    return new ResponseToProcess(..., json);
-  }
-}
-</code></pre>							
-					</section>	
-						
-				</section>
-				
-				<section>
-					<h2>Development &amp; Production Environments</h2>
-					<ul>
-						<li>Different databases</li>
-						<li>Only deploy when you're ready!</li>
-						<li><a href="https://www.stackmob.com/platform/deploy/" target="_blank">Easy rollout/rollback</a></li>
-					</ul>
-				</section>
-				
-				<section>
-					<h2>API Versions</h2>
-					<ul>
-						<li>Backwards support old clients</li>
-						<li>Concurrently run different versions of your custom code/schemas</li>
-					</ul>
-				</section>
-				
-				<section>
-					<h2>Time to Re-Market</h2>
-					<ul>
-						<li>Change configurations through the Dashboard</li>
-						<li>Instantly reflected in your application</li>
-						<li>No need to resubmit to the App Store</li>
-					</ul>
-				</section>
-				
-				<section>
-						<h2>Open Sourced SDKs</h2>
-						
-						<ul>
-							<li>iOS</li>
-							<li>Android</li>
-							<li>Javascript</li>
-							<li>Download them today!</li>
-						</ul>		
-				</section>
-				
-				<section>
-					<h2>Adding a backend with StackMob</h2>
-					<ul>
-						<li>Simple</li>
-						<li>Seamless</li>
-						<li>Flexible</li>
-						<li>Powerful</li>
-						<li>Free &rarr; Grow</li>
-					</ul>
-				</section>	
-				
-				<section>
-						<h2>Backend Services</h2>
-						<ul>
-							<li>User Authentication</li>
-							<li>Datastore</li>
-							<li>Security</li>
-							<li>GeoSpatial</li>
-							<li>Push</li>
-							<li>Hosting</li>
-							<li>Social Integration</li>
-							<li>Custom Server Side Code</li>
-							<li>Analytics</li>
-							<li>...</li>
-						</ul>
-				</section>	
-				
-				<section>
-						<h2>The future of the iOS SDK</h2>
-						<img src="https://dl.dropbox.com/u/79464649/future.jpg" />
-							
-				</section>
-				
-				<section>
-						<h2>Thank you!</h2>
-						<p><img width="400px" src="../images/stackmob_logo.png"/></p>
-					
-				</section>
-					
-				<section>
-					<h2>Resources</h2>
-					<ul>
-						<li><a href="https://www.stackmob.com/signup" target="_blank">Get a Free Account</a></li>
-						<li><a href="http://www.stackmob.com/devcenter/docs/Datastore-API#|js" target="_blank">iOS SDK Docs</a></li>
-						<li><a href="http://dev.iossdktest.stackmob.stackmobapp.com/ios/appsterdam.html#/" target="_blank">Slides: http://dev.iossdktest.stackmob.stackmobapp.com/ios/appsterdam.html#/</a></li>				
-					</ul>
-					
-				</section>
-				
-				<section>
-					<h2>Credits</h2>
-					<ul>
-						<li>Reveal.js and Styles - Hakim El Hattab </li>
-						<li>MySQL, Oracle, AWS, Dell, Intel, Google App Engine, Heroku - Google Images</li>
-						<li>Head In Hands, Awesome Note, Dr. Evil, Holding Hands, Future - Google Images</li>
-						<li>Cookie Monster - Sesame Street</li>
-						<li>Calvin &amp; Hobbes - Bill Watterson</li>
-						
-					</ul>
 				</section>
 
 			</div>
