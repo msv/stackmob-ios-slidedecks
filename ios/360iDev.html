@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushJava.js"></script>
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushCpp.js"></script>
 		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushObjC.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushPlain.js"></script>
 		 
 		<link href="../syntaxhighlighter/styles/shCoreMidnight.css" rel="stylesheet" type="text/css" />
 		<link href="../syntaxhighlighter/styles/shThemeMidnight.css" rel="stylesheet" type="text/css" />
@@ -299,34 +300,177 @@
 				
 				<section>
 						<h2>Details of implementation</h2>
-						<pre><code class="brush: objc; toolbar: false;">
-						[[NSString string dkfjdfk];
+						<section>
+						<h3>Loading meta data</h3>
+						<ul>
+							<li><strong>NSStoreTypeKey</strong> - @"NSIncrementalStore"</li>
+							<li><strong>NSStoreUUIDKey</strong> - [[NSProcessInfo processInfo] globallyUniqueString]</li>
+						</ul>
+						</section>
+						
+						<section>
+						<h3>A Save Request</h3>
+						
+						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						Dog *newDog = [NSEntityDescription 
+										insertNewObjectForEntityForName:@"Dog" 
+										inManagedObjectContext:self.managedObjectContext];
+						
+						[newDog setValue:@"Bandit" forKey:@"name"];
+						[newDog setValue:@"Border Collie" forKey:@"type"];
+						[newDog setValue:[newDog sm_assignObjectId] 
+							forKey:[newDog sm_primaryKeyField]];
+						
+						NSError *error = nil;
+						BOOL success = [self.managedObjectContext save:&error];
 						</code></pre>
+						</section>
+						
+						<section>
+						<h3>Managed Object Context</h3>
+						
+						<p><img src="../images/ManagedObjectContext.png"></p>
+						</section>
+						
+						<section>
+						<p class="big50 top25">obtainPermanentIDsForObjects:error:</p>
+						<ul>
+							<li class="top25">NSManagedObjectID &larr; Reference Object</li>
+							<li>Reference Object &larr; valueForKey:@"dog_id"</li>
+							<br/>
+							<li>NSManagedObjectID &harr; StackMob ID</li>
+						</ul>
+						</section>
+						
+						<section>
+						<p class="big50 top25">executeRequest:WithContext:error:</p>
+						<ul>
+							<li class="top25"><strong>NSSaveRequestType</strong> &rarr; handleSaveRequest:context:error:</li>
+							<li><strong>NSFetchRequestType</strong> &rarr; handleFetchRequest:context:error:</li>
+						</ul>
+						</section>
+						
+						<section>
+						<p class="big50 top25">"If the save request contains nil values for the inserted/updated/deleted/locked collections; you should treat it as a request to save the store metadata."</p>
+						</section>
+						
+						<section>
+						<p class="big50 top25">handleSaveRequest:context:error:</p>
+						</br>
+						<pre><code class="brush: plain; toolbar: false;">
+						For each bucket (inserted/updated/deleted):				
+							For each item in bucket:
+								Serialize Core Data object to NSDictionary;
+								Create relationship header if needed;
+								Persist to StackMob;
+								Report success or error;
+							end
+						end
+						</code></pre>
+						</section>
+						
+						<section>
+						<p class="big50 top25">handleFetchRequest:context:error:</p>
+						<pre><code class="brush: plain; toolbar: false;">
+						Switch ( NSFetchRequestResultType ):
+										
+							case NSManagedObjectResultType:
+							
+								Serialize fetchRequest to query;
+								Execute query on StackMob;
+								Deserialize results into instances of NSManagedObjectID;
+							
+							case NSManagedObjectIDResultType:
+							
+								Return IDs from results of NSManagedObjectResultType;
+								
+							case NSDictionaryResultType:
+								break;
+							case NSCountResultType:
+								break;
+							default:
+								break;
+						end
+						</code></pre>
+						</section>
+						
+						<section>
+						<p class="big50 top25">Serializing Fetch Request</p>
+						<ul>
+							<li class="top25">Identify the Entity</li>
+							<li>Compound or Comparison Predicate?</li>
+							<li>Convert each predicate type</li>
+							<li>Chain together and set as http request parameters</li>
+							<li>Use fetchOffset and fetchLimit to set query Range</li>
+						</ul>
+						</section>
+						
+						<section>
+						<p class="big50 top25">newValuesForObjectWithID:withContext:error:</p>
+						<ul>
+							<li class="top25">Called to fill a fault</li>
+							<li>Currently GET object from StackMob</li>
+							<li>Return value is instance of NSIncrementalStoreNode</li>
+						</ul>
+						</section>
+						
+						<section>
+						<p class="big50 top25">newValuesForRelationship:forObjectWithID:<br/>withContext:error:</p>
+						<ul>
+							<li class="top25">Called to fill a relationship fault</li>
+							<li>Currently GET object from StackMob</li>
+							<li>If To-One, return NSManagedObjectID for related object</li>
+							<li>If To-Many, return NSArray of NSManagedObjectIDs for relatedObjects</li>
+						</ul>
+						</section>
+						
+						<section>
+						<p><img src="../images/borat-nsinc.jpeg"></p>
+						
+						</section>
+						
 				</section>
 				
 				<section>
-						<h2>Hurdles/Obstacles</h2>
-						
+						<h2>Hurdles along the way</h2>
+						<section>
 						<ul>
-							<li>The serialization process: Core Data <--> StackMob</li>
-							<li>Bugs --> autoreleasing error</li>
-							<li>Decreasing Limitations --> matching up StackMob ids with Core Data NSManagedObjectID</li>
+							<li class="big 25 top75"><strong>The serialization process: Core Data <--> StackMob</strong></li>
 						</ul>
+						</section>
+						<section>
+						<ul>
+							<li class="big 25 top75">The serialization process: Core Data <--> StackMob</li>
+							<li class="big 25 top50"><strong>Autoreleasing errors so they propagate up</strong></li>
+						</ul>
+						</section>
+						<section>
+						<ul>
+							<li class="big 25 top75">The serialization process: Core Data <--> StackMob</li>
+							<li class="big 25 top50">Autoreleasing errors so they propagate up</li>
+							<li class="big 25 top50"><strong>Designing for a great experience</strong></li>
+						</ul>
+						</section>
 						
 				</section>
 				
 				<section>
 						<h2>What's next?</h2>
-						
-						<ul>
-							<li>Phase 2: Offline Sync</li>
-						</ul>
+						<p class="big50 top50">Phase 2: Offline Sync</p>
+						<p class="top25">... plus more Core Data feature support!
 				</section>
 				
 				<section>
 						<h2>Try it out!</h2>
 						
-						<p>Give the resources for stackmob ios sdk</p>
+						<p class="big50 top25">Download the SDK today @ </p>
+						<p class="big50 top25">www.stackmob.com/platform/start</p>
+				</section>
+				
+				<section>
+						<h2>Thank You!</h2>
+						<p class="top50">(Suggestions for a good pic here?)</p>
+						
 				</section>
 				
 				<section>
@@ -337,10 +481,7 @@
 							<li>core-data-model.png - http://www.cod3r.com/2009/05/working-with-core-data/</li>
 							<li>boxing-gloves.jpeg - http://waggeneredstrom.com/blog/2012/06/07/cause-marketing-v-corporate-philanthropy/</li>
 							<li>mobile-evolution.gif - http://www.celtnet.org.uk/mobile-phone/mobile-phone-information.html</li>
-							<li></li>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>borat-nsinc.jpeg - http://memegenerator.net/instance/26303852/</li>
 						</ul>
 				</section>
 
@@ -387,259 +528,4 @@
 		</script>			
 
 	</body>
-</html>				
-					
-					
-					
-<!--				
-					
-					
-					
-					
-					
-					
-					<section>
-						<h2>This.  But for you.</h2>
-						
-						<p>This isn't just for Facebook, Twitter, or the big guys.</p>
-						
-						<p>This is for you.</p>
-						
-						<p><img width="400px" src="../images/stackmob_logo.png"/></p>
-						
-					</section>
-					
-					
-				
-				<section>
-					<section>
-						<h2>Collections</h2>
-						<pre><code class="brush: javascript; highlight: [9,10,13]">
-						//From earlier..
-						var Todo = StackMob.Model.extend({
-							schemaName: 'todo'
-						});	
-						
-						...
-							
-						//Same as Backbone..
-						var Todos = StackMob.Collection.extend({
-							model: Todo
-						});
-						
-						var todos = new Todos();
-						todos.fetch();
-						</code></pre>					
-						
-					</section>
-					<section>
-						<h2>Fetch your Todos!</h2>
-	<p>var todos = new Todos();</p>
-	<p>todos.fetch();</p>
-	
-	<p><input id="fetchcollection" type="button" class="button" value="Fetch your Todos"/></p>
-	
-	<textarea id="fetchtodos"></textarea>
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#fetchcollection').click(function() {
-				var todos = new Todos();
-				todos.fetch(SMDebug.callbacks('Fetch Todos', 'fetchtodos'));
-			});
-		});
-	</script>						
-					</section>					
-				</section>
-				
-				<section>
-					<section>
-						<h2>Queries: Fetching specific models</h2>
-						
-						<p>Getting Finished Todos</p>
-	<pre><code class="brush: javascript; highlight: [1, 5]">
-	var q = new StackMob.Collection.Query();
-	q.equals('done', true);
-	
-	var todos = new Todos();
-	todos.query(q, callbacks);	
-	</code></pre>
-					</section>
-					<section>
-						<h2>Get Finished Todos</h2>
-<pre><code class="brush: javascript;">
-var q = new StackMob.Collection.Query();
-q.equals('done', true);
-
-var todos = new Todos();
-todos.query(q, callbacks);	
-</code></pre>						
-						<p><input type="button" class="button" id="querycollection" value="Get Finished Todos"/></p>
-						
-						<textarea id="fetchfinishedtodos"></textarea>
-						
-						<script type="text/javascript">
-							$(document).ready(function() {
-								$('#querycollection').click(function() {
-									var q = new StackMob.Collection.Query();
-									q.equals('done', true);
-									
-									var todos = new Todos();
-									todos.query(q, SMDebug.callbacks('Query Finished Todos', 'fetchfinishedtodos'));		
-								});
-							});
-						</script>
-					</section>
-					
-					<section>
-						<h2>Filter Queries</h2>
-<pre><code class="brush: javascript;">
-var q = new StackMob.Collection.Query();
-q.lt('age', 21); //less than
-q.gt('followers', 30); //greater than
-q.notEquals('age', 5); //not equals
-
-var people = new People(); //StackMob.Collection
-people.query(q, callbacks);
-</code></pre>
-					</section>
-					<section>
-						<h2>Ordering/Pagination</h2>
-					
-<pre><code class="brush: javascript;">
-var q = new StackMob.Collection.Query();
-q.orderAsc('age'); //order by ascending
-q.setRange(0,4); //pagination first 5 results
-
-var people = new People(); //StackMob.Collection
-people.query(q, callbacks);
-	
-</code></pre>						
-					</section>
-					<section>
-						<h2>Select Fields (Smaller Payload)</h2>
-<pre><code class="brush: javascript;">
-var q = new StackMob.Collection.Query();
-//select certain fields
-q.select('username').select('age');
-
-var people = new People(); //StackMob.Collection
-people.query(q, callbacks);
-	
-</code></pre>												
-  
-					</section>
-					
-					<section>
-						<h2>Select Fields Example</h2>
-<pre><code class="brush: javascript;">
-//q.select('username').select('age');
-
-[{
-	username: 'bob',
-	age: 10
-}, {
-	username: 'jane',
-	age: 15
-}, {
-	username: 'matt',
-	age: 20
-}]
-	
-</code></pre>						
-					</section>
-					
-				</section>
-				
-				<section>
-					<section>
-						<h2>Relationships</h2>
-						<img src="http://dl.dropbox.com/u/77348001/userTotodos.png" alt=""/>
-					</section>			
-					
-					<section>
-						<h2>Relationship: User &rarr; Todos</h2>
-						<ul>
-							<li><a href="https://www.stackmob.com/platform/api/schemas/edit/user" target="blank">Edit User Schema</a></li>
-							<li>Add one-to-many "todos" relationship</li>
-						</ul>
-						<img src="http://dl.dropbox.com/u/77348001/to-do-list-nothing.jpg" alt=""/>
-					</section>
-					
-					<section>
-						<h2>Give Todo Items to User</h2>
-						<img src="http://dl.dropbox.com/u/77348001/calvin_and_hobbes_calvin.png" alt=""/>
-<pre><code class="brush: javascript;">
-var todo1 = new Todo({ action: 'take out the trash' });	
-var todo2 = new Todo({ action: 'do the laundry' });
-var todo3 = new Todo({ action: 'prepare my slides!' });
-	
-var user = new StackMob.User({ username: 'calvin' });
-user.addRelationship('todos', [todo1, todo2, todo3], callbacks);
-</code></pre>						
-					</section>
-					
-					<section>
-						<h2>Let's try it.  But first..</h2>
-						<p>Let's see what "ericktai" looks like:</p>
-						<textarea id="readuser"></textarea>
-						<p><input type="button" id="fetchuser" class="button" value="Fetch User"/></p>
-						<script type="text/javascript">
-								$(document).ready(function() {
-									$('#fetchuser').click(function() {
-										var user = new StackMob.User({ username: 'ericktai' });
-										user.fetch(SMDebug.callbacks('Fetch User', 'readuser'));
-									});
-								});
-						</script>					
-					</section>
-					
-					<section>
-						<h2>Add Todos to User</h2>
-						
-						<textarea id="addtodos"></textarea>
-						<p><input type="button" id="addtodoitems" class="button" value="Add Todos to User"/></p>
-						<script type="text/javascript">
-								$(document).ready(function() {
-									$('#addtodoitems').click(function() {
-										var todo1 = new Todo({ action: 'take out the trash' });	
-										var todo2 = new Todo({ action: 'do the laundry' });
-										var todo3 = new Todo({ action: 'prepare my slides!' });
-											
-										var user = new StackMob.User({ username: 'ericktai' });
-										user.addRelationship('todos', [todo1, todo2, todo3], SMDebug.callbacks('Add Todos to User', 'addtodos'));
-									});
-								});
-						</script>	
-					</section>
-					<section>
-						<h2>Expand: Get Full Related Objects</h2>
-<pre><code class="brush: javascript;">
-//Use StackMob.Model#fetchExpanded
-
-var user = new StackMob.User({ username: 'ericktai' });
-user.fetchExpanded(1, callbacks);	
-</code></pre>						
-						<textarea id="readuserexpanded"></textarea>
-						<p><input type="button" id="fetchuserexpanded" class="button" value="Fetch Expanded User"/></p>
-						<script type="text/javascript">
-								$(document).ready(function() {
-									$('#fetchuserexpanded').click(function() {
-										var user = new StackMob.User({ username: 'ericktai' });
-										user.fetchExpanded(1, SMDebug.callbacks('Fetch Expanded User', 'readuserexpanded'));
-									});
-								});
-						</script>								
-					</section>
-				</section>
-				
-				<section>
-					<section>
-						<h2>User Authentication</h2>
-						
-						<img src="http://dl.dropbox.com/u/77348001/calving_hobbes_password.gif" alt=""/>
-					</section>
-					
-				
-
--->
+</html>
