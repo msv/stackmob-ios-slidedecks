@@ -144,6 +144,9 @@
 	left: 20px;
 }
 
+.line { font-size: 50px ! important; }
+.logo { width: 500px; }
+.gig35 { font-size: 35px;}
 .big50 { font-size: 50px;}
 .big75 { font-size: 75px;}
 .big100 { font-size: 100px;}
@@ -153,11 +156,12 @@
 .top50 { margin-top: 50px; }
 .top75 { margin-top: 75px; }
 .top100 { margin-top: 100px; }
+.lineSpace { line-height: 1.4em }
 		</style>
 		
 	</head>
 	<body>
-		<div id="stackmoblogo"><img src="../images/stackmob_logo.png"/></div>
+		<div id="stackmoblogo"><img src="../images/stackmob_small_full_white.png"></div>
 		<div id="reveal">
 			<div class="state-background"></div>
 			
@@ -175,34 +179,46 @@
 						<h2>Matt Vaznaian</h2>
 						<h3>matt@stackmob.com</h3>
 						<h3>@_mattvaz</h3>
-						<p><a href="http://www.stackmob.com"><img src="../images/stackmob_logo.png"/></a></p>
 					</section>
 				</section>
+				
 				<section>
-						<h2>So, have you used Core Data?</h2>
-						<img src="../images/CoreDataPic.png">
-				</section>		
-				<section>
-						<h2>What was it like before?</h2>
-						
+						<h2>Goals for this Presentation</h2>
 						<section>
-						<img src="../images/restfulwebservices.png">
-						</section>	
-				</section>
-				<section>
-						<h2>What problem are we trying to solve?</h2>
-						
-						<section>
-						<p class="big50 top75">Improve the experience of using a mobile development platform.</p>
+						<p class="big50 top50 lineSpace">To introduce you to a powerful class that allows Core Data to talk to a remote service.</p>
 						</section>
 						<section>
-						<p class="big50 top75">What existing iOS knowledge can we leverage?</p>
+						<p class="big50 top50 lineSpace">To walk you through the implementation of an NSIncrementalStore sublcass for StackMob's iOS SDK.</p>
+						</section>
+						<section>
+						<p class="big50 top50 lineSpace">To share the implementation challenges and how we overcame them - so you don't have to!</p>
+						</section>
+				</section>
+				
+				<section>
+						<p><img class="logo" src="../images/stackmob_fulllogo_white.png" ></p>
+						<br/>
+						<ul class="big50 lineSpace">
+							<li>A mobile development platform.</li>
+							<li>Drop the SDK into your application and gain access to a dynamic cloud data store.</li>
+							<li>Additional Features: Push Notifications, User/Facebook/Twitter Authentication, Custom Server Side Code.</li>
+						</ul>
+				</section>
+				
+				<section>
+						<h2>What problem are we trying to solve?</h2>
+						<section>
+						<p class="big50 top50 lineSpace">Improve the experience of using a mobile development platform.</p>
+						<p><img src="../images/restfulwebservices.png"></p>
+						</section>
+						<section>
+						<p class="big50 top75 lineSpace">What existing iOS knowledge can we leverage?</p>
 						</section>
 						<section>
 						<p class="big50 top75">Core Data?</p>
 						</section>
 						<section>
-						<p class="top50"><img src="../images/sqlite370_banner.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/stackmob_logo.png"></p>
+						<p class="top75"><img src="../images/sqlite370_banner.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/stackmob_logo.png"></p>
 						</section>
 						<section>
 						<p class="big75 top75">NSIncrementalStore!</p>
@@ -210,10 +226,15 @@
 				</section>
 				
 				<section>
+						<h2>So, have you used Core Data?</h2>
+						<img src="../images/CoreDataPic.png">
+				</section>
+				
+				<section>
 						<h2>Core Data Overview</h2>
 						
 						<section>
-						<p class="big50 top75">&ldquo;Core Data is an object graph and persistence framework provided by Apple.&rdquo;</p>
+						<p class="big50 top75 lineSpace">&ldquo;Core Data is an object graph and persistence framework provided by Apple.&rdquo;</p>
 						</section>
 						
 						<section>
@@ -239,7 +260,17 @@
 						<p class="big50 top25">&uarr; &darr;</p>
 						<p class="big50 top25">NSPersistentStoreCoordinator</p>
 						<p class="big50 top25">&uarr; &darr;</p>
-						<p class="big50 top25"><img src="../images/stackmob_logo.png"></p>
+						<p class="big50 top25">Remote Service</p>
+						</section>
+						
+						<section>
+						<p class="big50 top50">NSPredicate</p>
+						<p class="big25 top50">Apple's way to create query parameters.</p>
+						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						NSPredicate *predicate = [NSPredicate predicateWithFormat:
+														@"name = %@", username];
+						</code></pre>
+						<p class="top25">( <, >, !=, ==, like, between, etc... )</p>
 						</section>
 				</section>
 				
@@ -247,7 +278,7 @@
 						<h2>NSIncrementalStore</h2>
 						
 						<section>
-						<p class="big50 top75">&ldquo;...an abstract superclass defining the API through which Core Data communicates with a store.&rdquo;</p>
+						<p class="big50 top75 lineSpace">&ldquo;...an abstract superclass defining the API through which Core Data communicates with a store.&rdquo;</p>
 						</section>
 						<section>
 						<p class="big50 top50">Incremental Store vs. Atomic Store</p>
@@ -262,39 +293,24 @@
 						<h2>Methods to Override</h2>
 						
 						<section class="top50">
-						<ul class="big50">
-							<li><strong>loadMetadata:</strong></li>
-						</ul>
+						<p class="big50"><strong>loadMetadata:</strong></p>
+						<p class="top25 lineSpace">Provide metadata information about the store.</p>
 						</section>
 						<section class="top50">
-						<ul class="big50">
-							<li>loadMetadata:</li>
-							<li class="top25"><strong>executeRequest:WithContext:error:</strong></li>
-						</ul>
+						<p class="big50"><strong>executeRequest:WithContext:error:</strong></p>
+						<p class="top25 lineSpace">Kicks off the execution process.</p>
 						</section>
 						<section class="top50">
-						<ul class="big50">
-							<li>loadMetadata:</li>
-							<li class="top25">executeRequest:WithContext:error:</li>
-							<li class="top25"><strong>obtainPermanentIDsForObjects:error:</strong></li>
-						</ul>
+						<p class="big50"><strong>obtainPermanentIDsForObjects:error:</strong></p>
+						<p class="top25 lineSpace">Creates IDs for newly inserted objects.</p>
 						</section>
 						<section class="top50">
-						<ul class="big50">
-							<li>loadMetadata:</li>
-							<li class="top25">executeRequest:WithContext:error:</li>
-							<li class="top25">obtainPermanentIDsForObjects:error:</li>
-							<li class="top25"><strong>newValuesForObjectWithID:withContext:error:</strong></li>
-						</ul>
+						<p class="big50"><strong>newValuesForObjectWithID:withContext:error:</strong></p>
+						<p class="top25 lineSpace">Fills the fault for an object.</p>
 						</section>
 						<section class="top50">
-						<ul class="big50">
-							<li>loadMetadata:</li>
-							<li class="top25">executeRequest:WithContext:error:</li>
-							<li class="top25">obtainPermanentIDsForObjects:error:</li>
-							<li class="top25">newValuesForObjectWithID:withContext:error:</li>
-							<li class="top25"><strong>newValuesForRelationship:forObjectWithID:<br />&nbsp;&nbsp;&nbsp;&nbsp;withContext:error:</strong></li>
-						</ul>
+						<p class="big50"><strong>newValuesForRelationship:forObjectWithID:<br />&nbsp;&nbsp;&nbsp;&nbsp;withContext:error:</strong></p>
+						<p class="top25 lineSpace">Fills a fault for an object's relationship.</p>
 						</section>
 				</section>
 				
@@ -304,12 +320,12 @@
 						<h3>Loading meta data</h3>
 						<ul>
 							<li><strong>NSStoreTypeKey</strong> - @"NSIncrementalStore"</li>
-							<li><strong>NSStoreUUIDKey</strong> - [[NSProcessInfo processInfo] globallyUniqueString]</li>
+							<li class="top25"><strong>NSStoreUUIDKey</strong> - [[NSProcessInfo processInfo] globallyUniqueString]</li>
 						</ul>
 						</section>
 						
 						<section>
-						<h3>A Save Request</h3>
+						<h3>Creating a new Managed Object</h3>
 						
 						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
 						Dog *newDog = [NSEntityDescription 
@@ -320,9 +336,6 @@
 						[newDog setValue:@"Border Collie" forKey:@"type"];
 						[newDog setValue:[newDog sm_assignObjectId] 
 							forKey:[newDog sm_primaryKeyField]];
-						
-						NSError *error = nil;
-						BOOL success = [self.managedObjectContext save:&error];
 						</code></pre>
 						</section>
 						
@@ -333,12 +346,21 @@
 						</section>
 						
 						<section>
+						<h3>Making A Save Request</h3>
+						
+						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						NSError *error = nil;
+						BOOL success = [self.managedObjectContext save:&error];
+						</code></pre>
+						</section>
+						
+						<section>
 						<p class="big50 top25">obtainPermanentIDsForObjects:error:</p>
-						<ul>
+						<ul class="lineSpace">
 							<li class="top25">NSManagedObjectID &larr; Reference Object</li>
 							<li>Reference Object &larr; valueForKey:@"dog_id"</li>
 							<br/>
-							<li>NSManagedObjectID &harr; StackMob ID</li>
+							<li>NSManagedObjectID &harr; Database ID</li>
 						</ul>
 						</section>
 						
@@ -346,7 +368,7 @@
 						<p class="big50 top25">executeRequest:WithContext:error:</p>
 						<ul>
 							<li class="top25"><strong>NSSaveRequestType</strong> &rarr; handleSaveRequest:context:error:</li>
-							<li><strong>NSFetchRequestType</strong> &rarr; handleFetchRequest:context:error:</li>
+							<li class="top25"><strong>NSFetchRequestType</strong> &rarr; handleFetchRequest:context:error:</li>
 						</ul>
 						</section>
 						
@@ -360,9 +382,8 @@
 						<pre><code class="brush: plain; toolbar: false;">
 						For each bucket (inserted/updated/deleted):				
 							For each item in bucket:
-								Serialize Core Data object to NSDictionary;
-								Create relationship header if needed;
-								Persist to StackMob;
+								Serialize Core Data object to correct form (NSDictionary);
+								Persist to Remote Database (StackMob);
 								Report success or error;
 							end
 						end
@@ -376,8 +397,8 @@
 										
 							case NSManagedObjectResultType:
 							
-								Serialize fetchRequest to query;
-								Execute query on StackMob;
+								Serialize fetchRequest into REST-based query;
+								Execute query on Database (StackMob);
 								Deserialize results into instances of NSManagedObjectID;
 							
 							case NSManagedObjectIDResultType:
@@ -397,30 +418,30 @@
 						<section>
 						<p class="big50 top25">Serializing Fetch Request</p>
 						<ul>
-							<li class="top25">Identify the Entity</li>
-							<li>Compound or Comparison Predicate?</li>
-							<li>Convert each predicate type</li>
-							<li>Chain together and set as http request parameters</li>
-							<li>Use fetchOffset and fetchLimit to set query Range</li>
+							<li class="top25">Identify the Entity.</li>
+							<li class="top25">Compound or Comparison Predicate?</li>
+							<li class="top25">Convert each predicate type.</li>
+							<li class="top25">Chain together and set as http request parameters.</li>
+							<li class="top25">Use fetchOffset and fetchLimit to set query Range.</li>
 						</ul>
 						</section>
 						
 						<section>
 						<p class="big50 top25">newValuesForObjectWithID:withContext:error:</p>
 						<ul>
-							<li class="top25">Called to fill a fault</li>
-							<li>Currently GET object from StackMob</li>
-							<li>Return value is instance of NSIncrementalStoreNode</li>
+							<li class="top25">Called to fill a fault.</li>
+							<li class="top25">Read from local cache or remote database.</li>
+							<li class="top25">Return value is instance of NSIncrementalStoreNode.</li>
 						</ul>
 						</section>
 						
 						<section>
 						<p class="big50 top25">newValuesForRelationship:forObjectWithID:<br/>withContext:error:</p>
 						<ul>
-							<li class="top25">Called to fill a relationship fault</li>
-							<li>Currently GET object from StackMob</li>
-							<li>If To-One, return NSManagedObjectID for related object</li>
-							<li>If To-Many, return NSArray of NSManagedObjectIDs for relatedObjects</li>
+							<li class="top25">Called to fill a relationship fault.</li>
+							<li class="top25">Read from local cache or remote database.</li>
+							<li class="top25">If To-One, return NSManagedObjectID for related object.</li>
+							<li class="top25">If To-Many, return NSArray of NSManagedObjectIDs for related objects.</li>
 						</ul>
 						</section>
 						
@@ -434,22 +455,13 @@
 				<section>
 						<h2>Hurdles along the way</h2>
 						<section>
-						<ul>
-							<li class="big 25 top75"><strong>The serialization process: Core Data <--> StackMob</strong></li>
-						</ul>
+						<p class="big50 top50 lineSpace">The serialization process:<br/>Core Data &harr; StackMob</p>
 						</section>
 						<section>
-						<ul>
-							<li class="big 25 top75">The serialization process: Core Data <--> StackMob</li>
-							<li class="big 25 top50"><strong>Autoreleasing errors so they propagate up</strong></li>
-						</ul>
+						<p class="big50 top50 lineSpace">Autoreleasing errors so they propagate up</p>
 						</section>
 						<section>
-						<ul>
-							<li class="big 25 top75">The serialization process: Core Data <--> StackMob</li>
-							<li class="big 25 top50">Autoreleasing errors so they propagate up</li>
-							<li class="big 25 top50"><strong>Designing for a great experience</strong></li>
-						</ul>
+						<p class="big50 top50 lineSpace">Designing for a great experience</p>
 						</section>
 						
 				</section>
@@ -457,7 +469,7 @@
 				<section>
 						<h2>What's next?</h2>
 						<p class="big50 top50">Phase 2: Offline Sync</p>
-						<p class="top25">... plus more Core Data feature support!
+						<p class="top25 big50">... plus more Core Data feature support!
 				</section>
 				
 				<section>
