@@ -206,7 +206,7 @@
 				</section>
 				
 				<section>
-						<h2>What problem are we trying to solve?</h2>
+						<h2>What problem were we trying to solve?</h2>
 						<section>
 						<p class="big50 top50 lineSpace">Improve the experience of using a mobile development platform.</p>
 						<p><img src="../images/restfulwebservices.png"></p>
@@ -266,7 +266,7 @@
 						<section>
 						<p class="big50 top50">NSPredicate</p>
 						<p class="big25 top50">Apple's way to create query parameters.</p>
-						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						<pre><code class="brush: objc; toolbar: false;">
 						NSPredicate *predicate = [NSPredicate predicateWithFormat:
 														@"name = %@", username];
 						</code></pre>
@@ -327,20 +327,28 @@
 						<section>
 						<h3>Creating a new Managed Object</h3>
 						
-						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						<p><img src="../images/dog_entity.png"></p>
+						</section>
+						
+						<section>
+						<h3>Creating a new Managed Object</h3>
+						
+						<pre><code class="brush: objc; toolbar: false;">
 						Dog *newDog = [NSEntityDescription 
 										insertNewObjectForEntityForName:@"Dog" 
 										inManagedObjectContext:self.managedObjectContext];
 						
 						[newDog setValue:@"Bandit" forKey:@"name"];
 						[newDog setValue:@"Border Collie" forKey:@"type"];
+						
+						// Assign unique ID for remote service if needed
 						[newDog setValue:[newDog sm_assignObjectId] 
 							forKey:[newDog sm_primaryKeyField]];
 						</code></pre>
 						</section>
 						
 						<section>
-						<h3>Managed Object Context</h3>
+						<h3>Managed Object Context After Creation</h3>
 						
 						<p><img src="../images/ManagedObjectContext.png"></p>
 						</section>
@@ -348,7 +356,7 @@
 						<section>
 						<h3>Making A Save Request</h3>
 						
-						<pre><code class="brush: objc; toolbar: false; highlight: [11]">
+						<pre><code class="brush: objc; toolbar: false;">
 						NSError *error = nil;
 						BOOL success = [self.managedObjectContext save:&error];
 						</code></pre>
@@ -423,6 +431,7 @@
 							<li class="top25">Convert each predicate type.</li>
 							<li class="top25">Chain together and set as http request parameters.</li>
 							<li class="top25">Use fetchOffset and fetchLimit to set query Range.</li>
+							<li class="top25">Convert any other supported variables.</li>
 						</ul>
 						</section>
 						
@@ -481,7 +490,7 @@
 				
 				<section>
 						<h2>Thank You!</h2>
-						<p class="top50">(Suggestions for a good pic here?)</p>
+						<p><img src="../images/hercman.png"></p>
 						
 				</section>
 				
