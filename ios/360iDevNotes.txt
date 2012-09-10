@@ -1,0 +1,57 @@
+1. So, have you used Core Data?
+
+* Good/Bad experience?
+* Go to method for data persistence?
+* Stories?
+
+(Gauge audience usage and like factor)
+
+2. What was the iOS SDK like before?
+
+* REST-based, requiring developers to have a basic understanding of REST 
+  and the http protocol
+* Exposing a layer that should be abstracted out
+
+3. NSIncrementalStore
+
+* NSIncrementalStore is an abstract superclass defining the API through which Core Data communicates with a store. 
+This interface is designed to allow you to create persistent stores which load and save data incrementally, 
+allowing for the management of large and/or shared datasets.
+
+* Atomic Store: An incremental store is a Core Data store that allows you piecemeal access to its content. 
+This means that you can bring into memory just the data your program needs to operate, 
+rather than the entire contents of the store. 
+An incremental store is therefore much more efficient than an atomic store which must bring all the data into memory.
+
+* important for mobile applications to be able to persist incrementally because of network bandwidth, etc.
+* allows for offline solution to queue up changes and persist when network is available.
+
+4. Methods to override
+
+	a. loadMetadata: where we keep details of the Store, including the URL needed to access to API if needed.
+
+* There is no need to override the methods that you must otherwise override for a subclass of NSPersistentStore.
+
+5. Details of implementation
+
+	a. Load MetaData
+		Here we only store the type and give it a unique UUID key
+	
+	b. A Save Request:
+
+		Here we perform a basic insert of a managed object with the entity Dog.
+		Normally we would be done, Core data would save to the sqlite store and we would be done.
+		Let's get under the hood.
+	
+	c. Before we call save, let's look at the "buckets" of our managed object context
+	
+	d. obtainPermanentObjectIDs
+	
+	e. executeRequest
+	
+		FetchRequstTypes can have many different return types... have to pay attention to that.
+
+
+
+
+
