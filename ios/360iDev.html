@@ -145,7 +145,8 @@
 }
 
 .line { font-size: 50px ! important; }
-.logo { width: 500px; }
+.logo { width: 400px; }
+.pic { height: 300px; }
 .big35 { font-size: 35px;}
 .big50 { font-size: 50px;}
 .big75 { font-size: 75px;}
@@ -188,20 +189,21 @@
 						<p class="big50 top50 lineSpace">To introduce you to a powerful class that allows Core Data to talk to a remote service.</p>
 						</section>
 						<section>
-						<p class="big50 top50 lineSpace">To walk you through the implementation of an NSIncrementalStore sublcass for StackMob's iOS SDK.</p>
+						<p class="big50 top50 lineSpace">To walk you through the implementation of an NSIncrementalStore subclass.</p>
 						</section>
 						<section>
-						<p class="big50 top50 lineSpace">To share the implementation challenges and how we overcame them - so you don't have to!</p>
+						<p class="big50 lineSpace">To share the implementation challenges and solutions.</p>
+						<p><img class="pic" src="../images/bill-nye.jpeg"></p>
 						</section>
 				</section>
 				
 				<section>
-						<p><img class="logo" src="../images/stackmob_fulllogo_white.png" ></p>
+						<p>What is a &nbsp;&nbsp; <img class="logo" src="../images/stackmob_fulllogo_white.png" > &nbsp;&nbsp;&nbsp;?</p>
 						<br/>
-						<ul class="big50 lineSpace">
-							<li>A mobile development platform.</li>
-							<li>Drop the SDK into your application and gain access to a dynamic cloud data store.</li>
-							<li>Additional Features: Push Notifications, User/Facebook/Twitter Authentication, Custom Server Side Code.</li>
+						<ul class="lineSpace">
+							<li>A backend platform for mobile developers.</li>
+							<li>Drop the SDK into your XCode application and gain access to a customizable backend in the cloud.</li>
+							<li>Additional Features: Push Notifications, User/Facebook/Twitter Authentication, Custom Server Side Code, API Versioning.</li>
 						</ul>
 				</section>
 				
@@ -317,6 +319,11 @@
 				<section>
 						<h2>Details of implementation</h2>
 						<section>
+						<h3>Adding our Incremental Store to the PSC</h3>
+						
+						
+						</section>
+						<section>
 						<h3>Loading meta data</h3>
 						<ul>
 							<li><strong>NSStoreTypeKey</strong> - @"NSIncrementalStore"</li>
@@ -375,13 +382,13 @@
 						<section>
 						<p class="big50 top25">executeRequest:WithContext:error:</p>
 						<ul>
-							<li class="top25"><strong>NSSaveRequestType</strong> &rarr; handleSaveRequest:context:error:</li>
-							<li class="top25"><strong>NSFetchRequestType</strong> &rarr; handleFetchRequest:context:error:</li>
+							<li class="top25 big50 lineSpace"><strong>NSSaveRequestType</strong> &rarr; handleSaveRequest:context:error:</li>
+							<li class="top25 big50 lineSpace"><strong>NSFetchRequestType</strong> &rarr; handleFetchRequest:context:error:</li>
 						</ul>
 						</section>
 						
 						<section>
-						<p class="big50 top25">"If the save request contains nil values for the inserted/updated/deleted/locked collections; you should treat it as a request to save the store metadata."</p>
+						<p class="big50 top25 lineSpace">"If the save request contains nil values for the inserted/updated/deleted/locked collections, you should treat it as a request to save the store metadata."</p>
 						</section>
 						
 						<section>
@@ -493,8 +500,9 @@
 						<br />
 						
 						<h2>Try it out!</h2>
-						<p class="big50 top25">Download the SDK today @ </p>
+						<p class="big50">Download the SDK today @ </p>
 						<p class="big50 top25"><a href="https://www.stackmob.com/platform/start">https://www.stackmob.com/platform/start</a></p>
+						<p class="big50 top25">Github: <a href="https://github.com/stackmob/stackmob-ios-sdk">/stackmob/stackmob-ios-sdk</a></p>
 						<br />
 						
 						<h2>Want the slides?</h2>
@@ -510,6 +518,7 @@
 							<li>boxing-gloves.jpeg - http://waggeneredstrom.com/blog/2012/06/07/cause-marketing-v-corporate-philanthropy/</li>
 							<li>mobile-evolution.gif - http://www.celtnet.org.uk/mobile-phone/mobile-phone-information.html</li>
 							<li>borat-nsinc.jpeg - http://memegenerator.net/instance/26303852/</li>
+							<li>bill-nye.jpeg - http://www.quickmeme.com/meme/3q5lh3/</li>
 						</ul>
 				</section>
 
