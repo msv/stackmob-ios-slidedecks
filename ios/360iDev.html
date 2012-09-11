@@ -162,7 +162,7 @@
 		
 	</head>
 	<body>
-		<div id="stackmoblogo"><img src="../images/stackmob_small_full_white.png"></div>
+		<div id="stackmoblogo"><img src="../images/360iDev2.png"></div>
 		<div id="reveal">
 			<div class="state-background"></div>
 			
@@ -173,14 +173,9 @@
 					<!-- <p><span style="font-size: 24px;">(uses Backbone.js)</span></p> -->
 					<p style="margin-top: 100px;">
 						<!-- <p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@stackmob</a> | #stackmob</p> -->
-						<p>Matt Vaznaian | <a href="http://www.twitter.com/mvaznaian" target="_blank">@_mattvaz</a></p>
+						<p class="big50 lineSpace">Matt Vaznaian <br /> matt@stackmob.com <br /> <a href="http://www.twitter.com/mvaznaian" target="_blank">@_mattvaz</a></p>
+						
 					</p>
-				</section>	
-					<section>
-						<h2>Matt Vaznaian</h2>
-						<h3>matt@stackmob.com</h3>
-						<h3>@_mattvaz</h3>
-					</section>
 				</section>
 				
 				<section>
@@ -198,7 +193,7 @@
 				</section>
 				
 				<section>
-						<p>What is a &nbsp;&nbsp; <img class="logo" src="../images/stackmob_fulllogo_white.png" > &nbsp;&nbsp;&nbsp;?</p>
+						<p>What is &nbsp;&nbsp; <img class="logo" src="../images/stackmob_fulllogo_white.png" > &nbsp;&nbsp;&nbsp;?</p>
 						<br/>
 						<ul class="lineSpace">
 							<li>A backend platform for mobile developers.</li>
@@ -320,8 +315,24 @@
 						<h2>Details of implementation</h2>
 						<section>
 						<h3>Adding our Incremental Store to the PSC</h3>
-						
-						
+						<pre><code class="brush: objc; toolbar: false;">
+						[NSPersistentStoreCoordinator 
+								registerStoreClass:[SMIncrementalStore class] 
+								forStoreType:SMIncrementalStoreType];
+								
+        				_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] 
+        						initWithManagedObjectModel:self.managedObjectModel];
+        						
+        				NSError *error;
+        				
+        				[_persistentStoreCoordinator 
+        						addPersistentStoreWithType:SMIncrementalStoreType
+                                configuration:nil 
+                                URL:nil
+                                options:[NSDictionary dictionaryWithObject:self 
+                                            				forKey:SM_DataStoreKey] 
+                                error:&error];
+						</code></pre>
 						</section>
 						<section>
 						<h3>Loading meta data</h3>
