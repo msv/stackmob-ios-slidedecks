@@ -202,8 +202,8 @@
 						
 						<section>
 						<h3>Cloud Store</h3>
-						<img src="https://dl.dropbox.com/u/79464649/amazon.png" />
-						<img src="https://dl.dropbox.com/u/79464649/iCloud.png" />
+						<img width=350px src="https://dl.dropbox.com/u/79464649/amazon.png" />
+						<img width=300px src="https://dl.dropbox.com/u/79464649/iCloud.png" />
 						</section>
 						
 						<section>
@@ -214,7 +214,7 @@
 						
 						<section>
 						<h3>Platform</h3>
-						<p><a href="http://www.stackmob.com"><img src="../images/stackmob_fulllogo_white.png"/></a></p>
+						<p><img width=600px src="../images/stackmob_fulllogo_white.png"/></a></p>
 						</section>
 						
 				</section>	
@@ -336,10 +336,6 @@
     					}
 						</code></pre>
 
-					</section>
-					
-					<section>
-							<h2>Let's try it out!</h2>
 					</section>
 						
 					<section>
@@ -754,7 +750,7 @@
 						<h2>Call Custom Code from iOS App!</h2>
 						<pre><code class="brush: objc;">
 						[[SMCustomCodeRequest *ccRequest = SMCustomCodeRequest alloc] 
-							initPostRequestWithMethod:@"hello_world" body:nil];
+							initGetRequestWithMethod:@"hello_world" body:nil];
 							
 						[[SMClient defaultClient] performCustomCodeRequest:ccRequest 
 							onSuccess:^(NSURLRequest request, NSHTTPURLResponse response, id JSON) {
