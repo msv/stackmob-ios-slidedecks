@@ -1,0 +1,664 @@
+<html>
+	<head>
+		<title>StackMob - A Mobile Development Platform for Backend Solutions</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
+		<script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
+		<script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
+		<script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.2.1-min.js"></script>
+		<script type="text/javascript" src="http://static.stackmob.com/resources/js/jsonFormatter-0.1.0-min.js"></script>
+		<script type="text/javascript" src="stackmob-debug.js"></script>
+		
+		<!-- Include required JS files -->
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shCore.js"></script>
+		 
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushJScript.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushXml.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushJava.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushCpp.js"></script>
+		<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushObjC.js"></script>
+		 
+		<link href="../syntaxhighlighter/styles/shCoreMidnight.css" rel="stylesheet" type="text/css" />
+		<link href="../syntaxhighlighter/styles/shThemeMidnight.css" rel="stylesheet" type="text/css" />
+		
+		<style type="text/css">
+			.syntaxhighlighter { 
+				margin: 0px !important; padding-top: 15px; padding-bottom: 15px;
+				border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; 
+			
+			}
+		</style>
+		
+		<script type="text/javascript">
+			  StackMob.init({
+			  	appName: 'javascript',
+			  	clientSubdomain: 'stackmob',
+			  	apiVersion: 0
+			  });
+			  
+			  var Todo = StackMob.Model.extend({
+			  	schemaName: 'todo'
+			  });
+			  
+			  var Todos = StackMob.Collection.extend({
+			  	model: Todo
+			  });
+			  
+			  $(document).ready(function() {
+			  	SyntaxHighlighter.config.tagName = 'code';
+			  	SyntaxHighlighter.config.toolbar = false;
+			  	SyntaxHighlighter.all();
+			  	
+			  	Reveal.addEventListener('stampede', function() {
+			  		$('#stampede').attr('src', 'http://dl.dropbox.com/u/77348001/stampede.gif');
+			  	});
+			  });
+		</script>
+
+		<link rel="stylesheet" href="../reveal.js/css/reset.css">
+		<link rel="stylesheet" href="../reveal.js/css/main.css">
+		<style type="text/css" media="screen">
+			.button, .button a
+{
+	background: #98be47;
+	background: linear-gradient(top, #a8cf43, #98be47);
+	background: -moz-linear-gradient(top, #a8cf43, #98be47);
+	background: -ms-linear-gradient(top, #a8cf43, #98be47);
+	background: -o-linear-gradient(top, #a8cf43, #98be47);
+	background: -webkit-linear-gradient(top, #a8cf43, #98be47);
+	border: 1px solid #8cac42;
+	border-bottom-color: #7b9b36;
+	border-radius: 4px;
+	border-top-color: #94b146;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .5);
+	color: #fff !important;
+	cursor: pointer;
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+	moz-border-radius: 4px;
+	moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .5);
+	ms-border-radius: 4px;
+	ms-box-shadow: 0 2px 2px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .5);
+	o-border-radius: 4px;
+	o-box-shadow: 0 2px 2px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .5);
+	padding: 6px 14px;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+	webkit-border-radius: 4px;
+	webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+.button:hover, .button a:hover
+{
+	background: #67a215;
+	background: linear-gradient(top, #9dbf46, #67a215);
+	background: -moz-linear-gradient(top, #9dbf46, #67a215);
+	background: -ms-linear-gradient(top, #9dbf46, #67a215);
+	background: -o-linear-gradient(top, #9dbf46, #67a215);
+	background: -webkit-linear-gradient(top, #9dbf46, #67a215);
+	border: 1px solid #699631;
+	border-bottom-color: #457119;
+	border-top-color: #6d9e34;
+	color: rgba(250, 250, 250, .96);
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
+}
+.button:active, .button a:active
+{
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+	moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+	ms-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+	o-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+	padding: 4px 14px 7px;
+	webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+.button.blue, .button.blue a
+{
+	background: #6bbad7;
+	background: linear-gradient(top, #76cced, #6bbad7);
+	background: -moz-linear-gradient(top, #76cced, #6bbad7);
+	background: -ms-linear-gradient(top, #76cced, #6bbad7);
+	background: -o-linear-gradient(top, #76cced, #6bbad7);
+	background: -webkit-linear-gradient(top, #76cced, #6bbad7);
+	border: 1px solid #4ca8ca;
+	border-bottom-color: #4c9bb9;
+	border-top-color: #4cb2da;
+}
+.button.blue:hover, .button.blue a:hover
+{
+	background: #2c9cc6;
+	background: linear-gradient(top, #3cb7e5, #2c9cc6);
+	background: -moz-linear-gradient(top, #3cb7e5, #2c9cc6);
+	background: -ms-linear-gradient(top, #3cb7e5, #2c9cc6);
+	background: -o-linear-gradient(top, #3cb7e5, #2c9cc6);
+	background: -webkit-linear-gradient(top, #3cb7e5, #2c9cc6);
+	border: 1px solid #0083b4;
+	border-bottom-color: #00709b;
+	border-top-color: #0092ca;
+}
+
+#stackmoblogo {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+}
+
+.line { font-size: 50px ! important; }
+.logo { width: 400px; }
+.pic { height: 300px; }
+.big35 { font-size: 35px;}
+.big50 { font-size: 50px;}
+.big75 { font-size: 75px;}
+.big100 { font-size: 100px;}
+.top15 { margin-top: 15px; }
+.top25 { margin-top: 25px; }
+.top35 { margin-top: 35px; }
+.top50 { margin-top: 50px; }
+.top75 { margin-top: 75px; }
+.top100 { margin-top: 100px; }
+.lineSpace { line-height: 1.4em }
+.moreLineSpace { line-height: 2.0em }
+		</style>
+		
+	</head>
+	<body>
+		<div id="stackmoblogo"><img src="../images/stackmob_logo.png"/></div>
+		<div id="reveal">
+			<div class="state-background"></div>
+			
+			<div class="slides">
+				<section>
+					<h2>StackMob - A Mobile Development Platform for Backend Solutions</h2>
+					<!-- <h3 class="inverted">StackMob &amp; Objective-C</h3> -->
+					<!-- <p><span style="font-size: 24px;">(uses Backbone.js)</span></p> -->
+					<p style="margin-top: 100px;">
+						<p>Matt Vaznaian | <a href="http://www.twitter.com/mvaznaian" target="_blank">@_mattvaz</a></p>
+						<p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@StackMob</a></p>
+					</p>
+				</section>	
+					<section>
+						<h2>Matt Vaznaian</h2>
+						<h3>matt@stackmob.com</h3>
+						<h3>@_mattvaz</h3>
+					</section>
+				<!--
+				<section>
+						<h2>A Brief History of Building your backend</h2>
+						
+						<section>
+						</section>
+						
+						<section>
+						<h3>Database</h3>
+						<img src="https://dl.dropbox.com/u/79464649/oracle.jpg" />
+						<img src="https://dl.dropbox.com/u/79464649/mysql-big.gif" />					
+						</section>
+						
+						<section>
+						<h3>Hardware</h3>
+						<img src="https://dl.dropbox.com/u/79464649/300px-Dell_Logo.svg_1.png" />
+						<img src="https://dl.dropbox.com/u/79464649/intel-logo-300x198.jpg" />
+						</section>
+						
+						<section>
+						<h3>Cloud Store</h3>
+						<img width=350px src="https://dl.dropbox.com/u/79464649/amazon.png" />
+						<img width=300px src="https://dl.dropbox.com/u/79464649/iCloud.png" />
+						</section>
+						
+						<section>
+						<h3>Software Layer</h3>
+						<img src="https://dl.dropbox.com/u/79464649/heroku.jpg" />
+						<img src="https://dl.dropbox.com/u/79464649/appengine-logo.png" />
+						</section>
+						
+						<section>
+						<h3>Platform</h3>
+						<p><img width=600px src="../images/stackmob_fulllogo_white.png"/></a></p>
+						</section>
+						
+				</section>	
+				-->	
+				<section>
+						<h2>What is StackMob?</h2>
+						
+						<ul>
+							<li class="big50 lineSpace">Platform for Mobile Backends.</li>
+							<li class="big50 lineSpace">Lowering barrier of entry.</li>
+							<li class="big50 lineSpace">Focus on your user experience.</li>
+							<li class="big50 lineSpace">Access to "big company" backend power.</li>
+							<li class="big50 lineSpace">Develop. Scale. Revise. Analytics.</li>
+						</ul>
+				</section>
+				
+				<!--
+				<section>
+						<h2>StackMob: Who uses us?</h2>
+						
+						<p class="big50 lineSpace">We've powered apps:</p>
+						<ul>
+							<li class="big50 lineSpace">Featured in the AppStore</li>
+							<li class="big50 lineSpace">Top 20 in the AppStore</li>
+							<li class="big50 lineSpace">TechCrunch Disrupt</li>
+							<li class="big50 lineSpace">SXSW</li>
+							<li class="big50 lineSpace">Won Startup Weekend</li>
+							<li class="big50 lineSpace">Atari</li>
+						</ul>
+						<p class="big50 lineSpace">Games, Enterprise Apps, Social... </p>
+				</section>
+				-->
+				<section>
+				  		<h2>The First App You Ever Built</h2>
+				  		<p>
+				  		<img width="300px" src="https://dl.dropbox.com/u/79464649/helloWorld.png"/>
+				  		</p>
+				</section>
+				  
+				<section>
+				  		<h2>NSUserDefaults</h2>
+				  		<p>
+				  		<img width="300px" src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
+				  		</p>
+				</section>
+				  
+				<section>
+						<h2>The Lightbulb goes on!</h2>
+						
+						<p class="big50 lineSpace">Facebook, Twitter, Push, email, cross platform accessibility, image upload, geo-location, advanced database reads, users with login credentials who can only see certain data based on their role, 100,000,000 users on day one because our idea rocks.</p>
+					
+				</section>
+				
+				<section>
+						<h2>You could build it yourself</h2>
+						
+						<img width="600px" src="https://dl.dropbox.com/u/79464649/databaseCenter.jpg" />
+				</section>
+					
+				<section>
+						<h2>Or...focus on your user experience!</h2>
+						
+						<img src="https://dl.dropbox.com/u/79464649/awesome_note.png" />
+				</section>
+				
+				<section>
+						<h2>HollaGram!</h2>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Even more flexibility: Custom Code</h2>
+						<ul>
+							<li class="lineSpace big50">Java/Scala Server Side SDK.</li>
+							<li class="lineSpace big50">Write Code - StackMob REST-ifies it.</li>
+							<li class="lineSpace big50">iOS can execute your server code via REST API!</li>
+							<li class="lineSpace big50">iOS receives your custom JSON response too.</li>
+						</ul>
+					</section>
+						
+					<section>
+						<h2>Call Custom Code from iOS App!</h2>
+						<pre><code class="brush: objc;">
+						[[SMCustomCodeRequest *ccRequest = SMCustomCodeRequest alloc] 
+							initGetRequestWithMethod:@"hello_world" body:nil];
+							
+						[[SMClient defaultClient] performCustomCodeRequest:ccRequest 
+							onSuccess:^(NSURLRequest request, NSHTTPURLResponse response, id JSON) {
+								// Returns a JSON body specified by the custom code method
+							} onFailure:^(NSURLRequest request, NSHTTPURLResponse response, NSError *error, id JSON) {
+								// Handle failure
+							}
+						];
+						</code></pre>						
+					</section>
+						
+				</section>
+				
+				<section>
+					<h2>Development &amp; Production Environments</h2>
+					<ul>
+						<li class="moreLineSpace big50">Clean production database when you deploy.</li>
+						<li class="moreLineSpace big50">Only deploy when you're ready!</li>
+						<li class="moreLineSpace big50">Easy rollout/rollback.</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>API Versions</h2>
+					<ul>
+						<li class="moreLineSpace big50">Backwards support old clients.</li>
+						<li class="moreLineSpace big50">Concurrently run different versions of your custom code/schemas.</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Time to Re-Market</h2>
+					<ul>
+						<li class="moreLineSpace big50">Change configurations through the Dashboard.</li>
+						<li class="moreLineSpace big50">Instantly reflected in your application.</li>
+						<li class="moreLineSpace big50">No need to resubmit to the App Store.</li>
+					</ul>
+				</section>
+				
+				<!--
+				<section>
+						<h2>The future of the iOS SDK</h2>
+						<img height=500px src="https://dl.dropbox.com/u/79464649/future.jpg" />
+							
+				</section>
+			-->
+				
+				<section>
+						<h2>Thank you!</h2>
+						<p><img width="400px" src="../images/hercmanpic.png"/></p>
+					
+				</section>
+					
+				<section>
+					<h2>Try it out!</h2>
+					<a class="lineSpace big50" href="https://developer.stackmob.com">https://developer.stackmob.com</a>
+					<br/>
+					<br/>
+					<h2>Get the Slides</h2>
+					<a class="lineSpace big50" href="http://bit.ly/OKbXHM">http://bit.ly/OKbXHM</a>
+					
+				</section>
+
+			</div>
+			
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		<script type="text/javascript" src="../reveal.js/js/reveal.js"></script>
+		<script type="text/javascript">
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Loops the presentation, defaults to false
+				loop: false,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: false,
+
+				// UI style
+				theme: 'default', // default/neon
+				
+				rollingLinks: false,
+
+				// Transition style
+				transition: 'default' // default/cube/page/concave/linear(2d)
+			});
+		</script>			
+
+	</body>
+</html>				
+					
+					
+					
+<!--				
+					
+					
+					
+					
+					
+					
+					<section>
+						<h2>This.  But for you.</h2>
+						
+						<p>This isn't just for Facebook, Twitter, or the big guys.</p>
+						
+						<p>This is for you.</p>
+						
+						<p><img width="400px" src="../images/stackmob_logo.png"/></p>
+						
+					</section>
+					
+					
+				
+				<section>
+					<section>
+						<h2>Collections</h2>
+						<pre><code class="brush: javascript; highlight: [9,10,13]">
+						//From earlier..
+						var Todo = StackMob.Model.extend({
+							schemaName: 'todo'
+						});	
+						
+						...
+							
+						//Same as Backbone..
+						var Todos = StackMob.Collection.extend({
+							model: Todo
+						});
+						
+						var todos = new Todos();
+						todos.fetch();
+						</code></pre>					
+						
+					</section>
+					<section>
+						<h2>Fetch your Todos!</h2>
+	<p>var todos = new Todos();</p>
+	<p>todos.fetch();</p>
+	
+	<p><input id="fetchcollection" type="button" class="button" value="Fetch your Todos"/></p>
+	
+	<textarea id="fetchtodos"></textarea>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fetchcollection').click(function() {
+				var todos = new Todos();
+				todos.fetch(SMDebug.callbacks('Fetch Todos', 'fetchtodos'));
+			});
+		});
+	</script>						
+					</section>					
+				</section>
+				
+				<section>
+					<section>
+						<h2>Queries: Fetching specific models</h2>
+						
+						<p>Getting Finished Todos</p>
+	<pre><code class="brush: javascript; highlight: [1, 5]">
+	var q = new StackMob.Collection.Query();
+	q.equals('done', true);
+	
+	var todos = new Todos();
+	todos.query(q, callbacks);	
+	</code></pre>
+					</section>
+					<section>
+						<h2>Get Finished Todos</h2>
+<pre><code class="brush: javascript;">
+var q = new StackMob.Collection.Query();
+q.equals('done', true);
+
+var todos = new Todos();
+todos.query(q, callbacks);	
+</code></pre>						
+						<p><input type="button" class="button" id="querycollection" value="Get Finished Todos"/></p>
+						
+						<textarea id="fetchfinishedtodos"></textarea>
+						
+						<script type="text/javascript">
+							$(document).ready(function() {
+								$('#querycollection').click(function() {
+									var q = new StackMob.Collection.Query();
+									q.equals('done', true);
+									
+									var todos = new Todos();
+									todos.query(q, SMDebug.callbacks('Query Finished Todos', 'fetchfinishedtodos'));		
+								});
+							});
+						</script>
+					</section>
+					
+					<section>
+						<h2>Filter Queries</h2>
+<pre><code class="brush: javascript;">
+var q = new StackMob.Collection.Query();
+q.lt('age', 21); //less than
+q.gt('followers', 30); //greater than
+q.notEquals('age', 5); //not equals
+
+var people = new People(); //StackMob.Collection
+people.query(q, callbacks);
+</code></pre>
+					</section>
+					<section>
+						<h2>Ordering/Pagination</h2>
+					
+<pre><code class="brush: javascript;">
+var q = new StackMob.Collection.Query();
+q.orderAsc('age'); //order by ascending
+q.setRange(0,4); //pagination first 5 results
+
+var people = new People(); //StackMob.Collection
+people.query(q, callbacks);
+	
+</code></pre>						
+					</section>
+					<section>
+						<h2>Select Fields (Smaller Payload)</h2>
+<pre><code class="brush: javascript;">
+var q = new StackMob.Collection.Query();
+//select certain fields
+q.select('username').select('age');
+
+var people = new People(); //StackMob.Collection
+people.query(q, callbacks);
+	
+</code></pre>												
+  
+					</section>
+					
+					<section>
+						<h2>Select Fields Example</h2>
+<pre><code class="brush: javascript;">
+//q.select('username').select('age');
+
+[{
+	username: 'bob',
+	age: 10
+}, {
+	username: 'jane',
+	age: 15
+}, {
+	username: 'matt',
+	age: 20
+}]
+	
+</code></pre>						
+					</section>
+					
+				</section>
+				
+				<section>
+					<section>
+						<h2>Relationships</h2>
+						<img src="http://dl.dropbox.com/u/77348001/userTotodos.png" alt=""/>
+					</section>			
+					
+					<section>
+						<h2>Relationship: User &rarr; Todos</h2>
+						<ul>
+							<li><a href="https://www.stackmob.com/platform/api/schemas/edit/user" target="blank">Edit User Schema</a></li>
+							<li>Add one-to-many "todos" relationship</li>
+						</ul>
+						<img src="http://dl.dropbox.com/u/77348001/to-do-list-nothing.jpg" alt=""/>
+					</section>
+					
+					<section>
+						<h2>Give Todo Items to User</h2>
+						<img src="http://dl.dropbox.com/u/77348001/calvin_and_hobbes_calvin.png" alt=""/>
+<pre><code class="brush: javascript;">
+var todo1 = new Todo({ action: 'take out the trash' });	
+var todo2 = new Todo({ action: 'do the laundry' });
+var todo3 = new Todo({ action: 'prepare my slides!' });
+	
+var user = new StackMob.User({ username: 'calvin' });
+user.addRelationship('todos', [todo1, todo2, todo3], callbacks);
+</code></pre>						
+					</section>
+					
+					<section>
+						<h2>Let's try it.  But first..</h2>
+						<p>Let's see what "ericktai" looks like:</p>
+						<textarea id="readuser"></textarea>
+						<p><input type="button" id="fetchuser" class="button" value="Fetch User"/></p>
+						<script type="text/javascript">
+								$(document).ready(function() {
+									$('#fetchuser').click(function() {
+										var user = new StackMob.User({ username: 'ericktai' });
+										user.fetch(SMDebug.callbacks('Fetch User', 'readuser'));
+									});
+								});
+						</script>					
+					</section>
+					
+					<section>
+						<h2>Add Todos to User</h2>
+						
+						<textarea id="addtodos"></textarea>
+						<p><input type="button" id="addtodoitems" class="button" value="Add Todos to User"/></p>
+						<script type="text/javascript">
+								$(document).ready(function() {
+									$('#addtodoitems').click(function() {
+										var todo1 = new Todo({ action: 'take out the trash' });	
+										var todo2 = new Todo({ action: 'do the laundry' });
+										var todo3 = new Todo({ action: 'prepare my slides!' });
+											
+										var user = new StackMob.User({ username: 'ericktai' });
+										user.addRelationship('todos', [todo1, todo2, todo3], SMDebug.callbacks('Add Todos to User', 'addtodos'));
+									});
+								});
+						</script>	
+					</section>
+					<section>
+						<h2>Expand: Get Full Related Objects</h2>
+<pre><code class="brush: javascript;">
+//Use StackMob.Model#fetchExpanded
+
+var user = new StackMob.User({ username: 'ericktai' });
+user.fetchExpanded(1, callbacks);	
+</code></pre>						
+						<textarea id="readuserexpanded"></textarea>
+						<p><input type="button" id="fetchuserexpanded" class="button" value="Fetch Expanded User"/></p>
+						<script type="text/javascript">
+								$(document).ready(function() {
+									$('#fetchuserexpanded').click(function() {
+										var user = new StackMob.User({ username: 'ericktai' });
+										user.fetchExpanded(1, SMDebug.callbacks('Fetch Expanded User', 'readuserexpanded'));
+									});
+								});
+						</script>								
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>User Authentication</h2>
+						
+						<img src="http://dl.dropbox.com/u/77348001/calving_hobbes_password.gif" alt=""/>
+					</section>
+					
+				
+
+-->
