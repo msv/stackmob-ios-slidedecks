@@ -168,19 +168,14 @@
 			
 			<div class="slides">
 				<section>
-					<h2>StackMob - A Mobile Development Platform for Backend Solutions</h2>
+					<h2>StackMob<br/>A Mobile Backend Platform</h2>
 					<!-- <h3 class="inverted">StackMob &amp; Objective-C</h3> -->
 					<!-- <p><span style="font-size: 24px;">(uses Backbone.js)</span></p> -->
 					<p style="margin-top: 100px;">
 						<p>Matt Vaznaian | <a href="http://www.twitter.com/mvaznaian" target="_blank">@_mattvaz</a></p>
 						<p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@StackMob</a></p>
 					</p>
-				</section>	
-					<section>
-						<h2>Matt Vaznaian</h2>
-						<h3>matt@stackmob.com</h3>
-						<h3>@_mattvaz</h3>
-					</section>
+				</section>
 				<!--
 				<section>
 						<h2>A Brief History of Building your backend</h2>
@@ -219,17 +214,6 @@
 						
 				</section>	
 				-->	
-				<section>
-						<h2>What is StackMob?</h2>
-						
-						<ul>
-							<li class="big50 lineSpace">Platform for Mobile Backends.</li>
-							<li class="big50 lineSpace">Lowering barrier of entry.</li>
-							<li class="big50 lineSpace">Focus on your user experience.</li>
-							<li class="big50 lineSpace">Access to "big company" backend power.</li>
-							<li class="big50 lineSpace">Develop. Scale. Revise. Analytics.</li>
-						</ul>
-				</section>
 				
 				<!--
 				<section>
@@ -260,11 +244,25 @@
 				  		<img width="300px" src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
 				  		</p>
 				</section>
+
+				<section>
+				  		<h2>Core Data</h2>
+				  		<p>
+				  		<img width="600px" src="https://dl.dropbox.com/u/79464649/core-data-model.png" />
+				  		</p>
+				</section>
 				  
 				<section>
-						<h2>The Lightbulb goes on!</h2>
+						<h2>Your New App Idea</h2>
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/databases.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/lock.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/geo.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/facebooksm.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/twittersm.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/email.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/s3.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/scaling.jpeg" />
 						
-						<p class="big50 lineSpace">Facebook, Twitter, Push, email, cross platform accessibility, image upload, geo-location, advanced database reads, users with login credentials who can only see certain data based on their role, 100,000,000 users on day one because our idea rocks.</p>
 					
 				</section>
 				
@@ -279,20 +277,43 @@
 						
 						<img src="https://dl.dropbox.com/u/79464649/awesome_note.png" />
 				</section>
-				
+
 				<section>
-						<h2>HollaGram!</h2>
+						<h2>StackMob To The Rescue</h2>
+						
+						<ul>
+							<li class="big50 lineSpace">Platform for Mobile Backends.</li>
+							<li class="big50 lineSpace">Lowering barrier of entry.</li>
+							<li class="big50 lineSpace">Focus on your user experience.</li>
+							<li class="big50 lineSpace">Access to "big company" backend power.</li>
+						</ul>
 				</section>
 				
 				<section>
+						<h2>Let's Build HollaGram!</h2>
+				</section>
+				
+				<section>
+
 					<section>
 						<h2>Even more flexibility: Custom Code</h2>
-						<ul>
-							<li class="lineSpace big50">Java/Scala Server Side SDK.</li>
-							<li class="lineSpace big50">Write Code - StackMob REST-ifies it.</li>
-							<li class="lineSpace big50">iOS can execute your server code via REST API!</li>
-							<li class="lineSpace big50">iOS receives your custom JSON response too.</li>
-						</ul>
+						<pre><code class="brush: java">
+//Java
+public class HelloWorldExample implements CustomCodeMethod {
+  
+  @Override
+  public String getMethodName() {
+    return "hello_world";
+  }
+  
+  @Override
+  public ResponseToProcess execute(...) {
+     
+    // Do fancy server side things
+    
+  }
+}
+</code></pre>
 					</section>
 						
 					<section>
@@ -315,19 +336,12 @@
 				
 				<section>
 					<h2>Development &amp; Production Environments</h2>
-					<ul>
-						<li class="moreLineSpace big50">Clean production database when you deploy.</li>
-						<li class="moreLineSpace big50">Only deploy when you're ready!</li>
-						<li class="moreLineSpace big50">Easy rollout/rollback.</li>
-					</ul>
+					<img width="500px" src="https://dl.dropbox.com/u/79464649/deployToProd.png" />
 				</section>
 				
 				<section>
 					<h2>API Versions</h2>
-					<ul>
-						<li class="moreLineSpace big50">Backwards support old clients.</li>
-						<li class="moreLineSpace big50">Concurrently run different versions of your custom code/schemas.</li>
-					</ul>
+					<img width="500px" src="https://dl.dropbox.com/u/79464649/apiVersions.png" />
 				</section>
 				
 				<section>
@@ -355,11 +369,17 @@
 					
 				<section>
 					<h2>Try it out!</h2>
+					<a class="lineSpace big50" href="https://github.com/msv/hollagram-ios">https://github.com/msv/hollagram-ios</a>
+					<br/>
+					<br/>
 					<a class="lineSpace big50" href="https://developer.stackmob.com">https://developer.stackmob.com</a>
 					<br/>
 					<br/>
 					<h2>Get the Slides</h2>
 					<a class="lineSpace big50" href="http://bit.ly/OKbXHM">http://bit.ly/OKbXHM</a>
+					<br/>
+					<br/>
+					<p class="lineSpace">Matt Vaznaian | matt@stackmob.com | @_mattvaz</p>
 					
 				</section>
 
