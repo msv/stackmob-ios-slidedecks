@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>StackMob - Adding a Backend to your iOS App</title>
+		<title>StackMob - A Mobile Development Platform for Backend Solutions</title>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 		<script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
 		<script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.3.3-min.js"></script>
@@ -168,20 +168,15 @@
 			
 			<div class="slides">
 				<section>
-					<h2>Adding a Server-Side Backend to your iOS Application</h2>
+					<h2>StackMob<br/>A Mobile Backend Platform</h2>
 					<!-- <h3 class="inverted">StackMob &amp; Objective-C</h3> -->
 					<!-- <p><span style="font-size: 24px;">(uses Backbone.js)</span></p> -->
 					<p style="margin-top: 100px;">
 						<p>Matt Vaznaian | <a href="http://www.twitter.com/mvaznaian" target="_blank">@_mattvaz</a></p>
-						<p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@stackmob</a> | #stackmob</p>
+						<p><a href="http://www.stackmob.com" target="_blank">stackmob.com</a> | <a href="http://www.twitter.com/stackmob">@StackMob</a></p>
 					</p>
-				</section>	
-					<section>
-						<h2>Matt Vaznaian</h2>
-						<h3>matt@stackmob.com</h3>
-						<h3>@_mattvaz</h3>
-					</section>
-				  
+				</section>
+				<!--
 				<section>
 						<h2>A Brief History of Building your backend</h2>
 						
@@ -218,20 +213,9 @@
 						</section>
 						
 				</section>	
-						
-				<section>
-						<h2>StackMob: Who are we?</h2>
-						
-						<ul>
-							<li class="big50 lineSpace">Mobile Backend Platform.</li>
-							<li class="big50 lineSpace">Lowering barrier of entry.</li>
-							<li class="big50 lineSpace">Focus on your user experience.</li>
-							<li class="big50 lineSpace">Access to "big company" backend power.</li>
-							<li class="big50 lineSpace">Develop. Scale. Analytics. Revisioning.</li>
-						</ul>
-						
-				</section>
+				-->	
 				
+				<!--
 				<section>
 						<h2>StackMob: Who uses us?</h2>
 						
@@ -246,506 +230,93 @@
 						</ul>
 						<p class="big50 lineSpace">Games, Enterprise Apps, Social... </p>
 				</section>
-				
+				-->
 				<section>
 				  		<h2>The First App You Ever Built</h2>
 				  		<p>
-				  		<img src="https://dl.dropbox.com/u/79464649/helloWorld.png"/>
+				  		<img width="300px" src="https://dl.dropbox.com/u/79464649/helloWorld.png"/>
 				  		</p>
 				</section>
 				  
 				<section>
 				  		<h2>NSUserDefaults</h2>
 				  		<p>
-				  		<img src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
+				  		<img width="300px" src="https://dl.dropbox.com/u/79464649/helloMatt.png" />
+				  		</p>
+				</section>
+
+				<section>
+				  		<h2>Core Data</h2>
+				  		<p>
+				  		<img width="600px" src="https://dl.dropbox.com/u/79464649/core-data-model.png" />
 				  		</p>
 				</section>
 				  
 				<section>
-						<h2>The Next Level</h2>
+						<h2>Your New App Idea</h2>
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/databases.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/lock.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/geo.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/facebooksm.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/twittersm.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/email.jpeg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/s3.jpg" />
+						<img width="200px" src="https://dl.dropbox.com/u/79464649/scaling.jpeg" />
 						
-						<ul>
-				  			<li class="big50 lineSpace">Access Data From Multiple Devices.</li>
-				  			<li class="big50 lineSpace">Lots of Features == Lots of Data.</li>
-				  		</ul>
+					
 				</section>
 				
 				<section>
-						<h2>I could do it myself</h2>
+						<h2>You could build it yourself</h2>
 						
-						<img src="https://dl.dropbox.com/u/79464649/headInHands.jpg" />
+						<img width="600px" src="https://dl.dropbox.com/u/79464649/databaseCenter.jpg" />
 				</section>
 					
 				<section>
-						<h2>Focus on your user experience!</h2>
+						<h2>Or...focus on your user experience!</h2>
 						
 						<img src="https://dl.dropbox.com/u/79464649/awesome_note.png" />
 				</section>
-				
-				<section>
-						<h2>The StackMob iOS SDK</h2>
-				</section>
-
-					
-				<section>
-						<h2>Initialize</h2>
-						
-						<pre><code class="brush: objc; toolbar: false; highlight: [2,4]">
-						// AppDelegate.h
-						@class SMClient;
-						
-						@property (strong, nonatomic) SMClient *client;
-						</code></pre>
-						
-						<pre><code class="brush: objc; toolbar: false; highlight: [2,7,8]">
-						// AppDelegate.m
-						#import "StackMob.h"
-						
-						- (BOOL)application:(UIApplication *)application 
-						didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
-						{
-							self.client = [[SMClient alloc] initWithAPIVersion:@"YOUR_API_VERSION" 
-											publicKey:@"YOUR_PUBLIC_KEY"]; 
-
-							return YES;
-						}
-						</code></pre>
-				</section>
-					
-										
-				<section>
-						<h2>Server-Side Persistence: Create</h2>
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: objc; toolbar: false;">
-
-						NSManagedObject *newManagedObject = [NSEntityDescription 
-											insertNewObjectForEntityForName:@"Todo" 
-											inManagedObjectContext:self.managedObjectContext];
-    
-    					[newManagedObject setValue:self.titleField.text forKey:@"title"];
-    					[newManagedObject setValue:[newManagedObject sm_assignObjectId] 
-    						forKey:[newManagedObject sm_primaryKeyField]];
-    
-    					NSError *error = nil;
-    					if (![self.managedObjectContext save:&error]) {
-           					NSLog(@"There was an error! %@", error);
-    					}
-    					else {
-            				NSLog(@"You created a new object!");
-    					}
-						</code></pre>
-
-					</section>
-						
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: objc; toolbar: false; highlight: [1,2,3]">
-
-						NSManagedObject *newManagedObject = [NSEntityDescription 
-											insertNewObjectForEntityForName:@"Todo" 
-											inManagedObjectContext:self.managedObjectContext];
-    
-    					[newManagedObject setValue:self.titleField.text forKey:@"title"];
-    					[newManagedObject setValue:[newManagedObject sm_assignObjectId] 
-    						forKey:[newManagedObject sm_primaryKeyField]];
-    
-    					NSError *error = nil;
-    					if (![self.managedObjectContext save:&error]) {
-           					NSLog(@"There was an error! %@", error);
-    					}
-    					else {
-            				NSLog(@"You created a new object!");
-    					}
-						</code></pre>
-
-					</section>
-					
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: objc; toolbar: false; highlight: [5,6,7]">
-
-						NSManagedObject *newManagedObject = [NSEntityDescription 
-											insertNewObjectForEntityForName:@"Todo" 
-											inManagedObjectContext:self.managedObjectContext];
-    
-    					[newManagedObject setValue:self.titleField.text forKey:@"title"];
-    					[newManagedObject setValue:[newManagedObject sm_assignObjectId] 
-    						forKey:[newManagedObject sm_primaryKeyField]];
-    
-    					NSError *error = nil;
-    					if (![self.managedObjectContext save:&error]) {
-           					NSLog(@"There was an error! %@", error);
-    					}
-    					else {
-            				NSLog(@"You created a new object!");
-    					}
-						</code></pre>
-
-					</section>
-					
-					<section>
-						<a href="javascript:void(0);">Syntax:</a>
-						<pre><code class="brush: objc; toolbar: false; highlight: [9,10,11,12,13,14,15]">
-
-						NSManagedObject *newManagedObject = [NSEntityDescription 
-											insertNewObjectForEntityForName:@"Todo" 
-											inManagedObjectContext:self.managedObjectContext];
-    
-    					[newManagedObject setValue:self.titleField.text forKey:@"title"];
-    					[newManagedObject setValue:[newManagedObject sm_assignObjectId] 
-    						forKey:[newManagedObject sm_primaryKeyField]];
-    
-    					NSError *error = nil;
-    					if (![self.managedObjectContext save:&error]) {
-           					NSLog(@"There was an error! %@", error);
-    					}
-    					else {
-            				NSLog(@"You created a new object!");
-    					}
-						</code></pre>
-
-					</section>						
-
-					<section>
-							<h2>Aw yeah! Backend Created!</h2>
-	
-							<p>
-							<img src="http://dl.dropbox.com/u/9289507/joy.gif" alt=""/>
-							</p>
-					</section>
-
-				</section>
-
 
 				<section>
-					<h2>Read from DB</h2>
-					<a href="javascript:void(0);">Read Item</a>
-					<pre><code class="brush: objc; toolbar: false;">
-					NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-     
-    				NSEntityDescription *entity = [NSEntityDescription entityForName:@"Todo" 
-    									inManagedObjectContext:self.managedObjectContext];
-     
-    				[fetchRequest setEntity:entity];
-     
-    				// set any predicates or sort descriptors, etc.
-     
-    				NSError *anError = nil;
-     
-    				NSArray *theResults = [self.managedObjectContext 
-    											executeFetchRequest:fetchRequest 
-    											error:&anError];
-					</code></pre>
-						
-				</section>
-				
-				<section>
-					
-					<h2>Update DB</h2>
-					<a href="javascript:void(0);">Update Item</a>
-					<pre><code class="brush: objc; toolbar: false;">
-					[aManagedObject setValue:@"something different" forKey:@"title"];
-     
-    				NSError *error = nil;
-    				if (![self.managedObjectContext save:&error]) {
-        				NSLog(@"There was an error! %@", error);
-    				}
-    				else {
-        				NSLog(@"You saved!");
-    				}
-					</code></pre>
-					
-				</section>
-						
-				<section>
-					<h2>Delete from DB</h2>
-					<a href="javascript:void(0);">Delete Item</a>
-					<pre><code class="brush: objc;">
-					[self.managedObjectContext deleteObject:aManagedObject];
-     
-    				NSError *error = nil;
-    				if (![self.managedObjectContext save:&error]) {
-        				NSLog(@"There was an error! %@", error);
-    				}
-    				else {
-        				NSLog(@"You deleted an object!");
-    				}
-					</code></pre>
-			  </section>
-			  
-			  <section>
-			  		<h2>Lower Level Datastore API</h2>
-			  		<ul>
-			  			<li class="moreLineSpace big50">createObject:inSchema:onSuccess:onFailure:</li>
-			  			<li class="moreLineSpace big50">readObjectWithId:inSchema:onSuccess:onFailure:</li>
-			  			<li class="moreLineSpace big50">updateObjectWithId:inSchema:update:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onSuccess:onFailure:</li>
-			  			<li class="moreLineSpace big50">deleteObjectId:inSchema:onSuccess:onFailure:</li>
-			  		</ul>
-			  </section>
-				
-				<section>
-					<h2>WOOHOO for CRUD!</h2>
-					<img src="https://dl.dropbox.com/u/79464649/homer_woohoo.jpg" />
-				</section>
-				
-				<section>
-					<h2>Core Data Integration</h2>
-					<section>
-					<p class="big50 moreLineSpace">Brought to you by</p>
-					<p class="big75 lineSpace">NSIncrementalStore</p>
-					</section>
-					<section>
-					<img src="../images/inc_store_diagram_1.png" />
-					</section>
-					<section>
-					<img src="../images/inc_store_diagram_2.png" />
-					</section>
-					<section>
-					<img src="../images/inc_store_diagram_3.png" />
-					</section>
-				</section>
-				
-				<section>
-						<h2>But I want more than just a datastore in the cloud!</h2>
+						<h2>StackMob To The Rescue</h2>
 						
 						<ul>
-				  			<li class="lineSpace big50">Queries</li>
-				  			<li class="lineSpace big50">Relate this object to that object</li>
-							<li class="lineSpace big50">User Authentication</li>
-							<li class="lineSpace big50">Push Notifications</li>
-							<li class="lineSpace big50"><img src="../images/f_logo.png"/>
-								<img src="../images/twitter_logo.png"/>
-							</li>
-				  		</ul>
-				</section>					
-					
-					
-				<section>
-						<h2>Queries</h2>
-						
-						<section>
-						<img src="https://dl.dropbox.com/u/79464649/massiveData_dr-evil.jpg" />
-						
-						</section>
-						
-						<section>
-							<h3>NSPredicate</h3>
-							<pre><code class="brush: objc; toolbar: false; highlight: [9,10]">
-					NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-     
-    				NSEntityDescription *entity = [NSEntityDescription entityForName:@"Todo" 
-    									inManagedObjectContext:self.managedObjectContext];
-     
-    				[fetchRequest setEntity:entity];
-     
-    				// set any predicates or sort descriptors, etc.
-    				NSPredicate *equalPredicate = [NSPredicate predicateWithFormat:@"title == %@", self.someTitle];
-    				[fetchRequest setPredicate:equalPredicate];
-     
-    				NSError *anError = nil;
-     
-    				NSArray *theResults = [self.managedObjectContext 
-    											executeFetchRequest:fetchRequest 
-    											error:&anError];
-					</code></pre>
-							
-						</section>
-						
-						<section>
-							<h3>Comparison Predicates</h3>
-							<ul>
-								<li>==</li>
-								<li>!=</li>
-								<li><</li>
-								<li><=</li>
-								<li>></li>
-								<li>>=</li>
-								<li>IN</li>
-								<li>BETWEEN</li>						
-							</ul>
-						</section>
-						
-						<section>
-							<h3>Pagination</h3>
-							<pre><code class="brush: objc; toolbar: false; highlight: [9,10,11,12,13]">
-					NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-     
-    				NSEntityDescription *entity = [NSEntityDescription entityForName:@"Todo" 
-    									inManagedObjectContext:self.managedObjectContext];
-     
-    				[fetchRequest setEntity:entity];
-     
-    				// set any predicates or sort descriptors, etc.
-    				NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] 
-    														initWithKey:@"title" 
-    														ascending:YES];
-    				NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
-    				[fetchRequest setSortDescriptors:sortDescriptors];
-     
-    				NSError *anError = nil;
-     
-    				NSArray *theResults = [self.managedObjectContext 
-    											executeFetchRequest:fetchRequest 
-    											error:&anError];
-					</code></pre>
-							
-						</section>
-						
-						<section>
-							<h3>Lower Level Datastore API</h3>
-							<pre><code class="brush: objc;">
-							SMQuery *query = [[SMQuery alloc] initWithSchema:@"todo"];
-							[q where:@"age" isGreaterThan:25];
-
-							[[[SMClient defaultClient] dataStore] performQuery:query
-								onSuccess:^(NSArray *results) {
-									// Handle success
-								} onFailure:^(NSError *error) {
-									// Handle error
-								}
-							];
-							</code></pre>
-						</section>
-						
-				</section>
-				
-				<section>
-						<h2>Relationships</h2>
-						<img height=500px src="https://dl.dropbox.com/u/79464649/holdingHands.jpg" />
-				</section>
-				
-				<section>
-						<h2>User Authentication</h2>
-						<section>
-						<img src="http://dl.dropbox.com/u/77348001/calving_hobbes_password.gif" alt=""/>
-						</section>
-				
-						<section>
-							<h3>Login</h2>
-							<pre><code class="brush: objc;">
-							[[SMClient defaultClient] loginWithUsername:self.usernameField.text 
-								password:self.passwordField.text 
-								onSuccess:^(NSDictionary *results) {
-            						// Handle success
-    							} onFailure:^(NSError *error) {
-            						// Handle failure
-    							}];
-							</code></pre>			
-						</section>
-						
-						<section>
-							<h3>Check Login Status</h2>
-							<pre><code class="brush: objc;">
-							[[SMClient defaultClient] getLoggedInUserOnSuccess:^(NSDictionary *result) {
-            					self.statusLabel.text = [NSString stringWithFormat:@"Hello, %@", 
-            											[result objectForKey:@"username"]];
-        					} onFailure:^(NSError *error) {
-            					NSLog(@"No user found");
-        					}];
-							</code></pre>			
-						</section>
-						
-						<section>
-							<h3>Logout</h2>
-							<pre><code class="brush: objc;">
-							[[SMClient defaultClient] logoutOnSuccess:^(NSDictionary *result) {
-        						// Handle success
-    						} onFailure:^(NSError *error) {
-        						// Handle error
-    						}];
-							</code></pre>			
-						</section>
-						
-						<section>
-							<h3>Password Management</h3>
-							<ul>
-								<li class="moreLineSpace big50">Forgotten Passwords</li>
-								<li class="moreLineSpace big50">Reset Password</li>
-							</ul>
-						
-						</section>
-				</section>
-				<!--		
-				<section>
-						<h2>Security &rarr; OAuth 2.0</h2>
-					
-					<ul>
-						<li>Industry Standard: OAuth 1.0/2.0</li>
-						<li>Public/Private Keys identify your app's requests</li>
-						<li>FB/Twitter: OAuth 2.0.  Username/Password</li>
-						<li>In current JS SDK for pre-trials</li>
-					</ul>
-					
-				</section>
-					-->
-				<section>
-						<h2>Access Controls</h2>
-						<ul>
-							<li class="moreLineSpace big50">Share objects to certain users.</li>
-							<li class="moreLineSpace big50">Only authenticated users should be able to access certain data.</li>
-							<li class="moreLineSpace big50">Limit visibility.</li>
+							<li class="big50 lineSpace">Platform for Mobile Backends.</li>
+							<li class="big50 lineSpace">Lowering barrier of entry.</li>
+							<li class="big50 lineSpace">Focus on your user experience.</li>
+							<li class="big50 lineSpace">Access to "big company" backend power.</li>
 						</ul>
 				</section>
 				
 				<section>
-						<h2>Push</h2>
-						<pre><code class="brush: objc;">
-						// In application:didFinishLaunchingWithOptions:
-
-						// Assuming you declared the variable "SMPushClient *pushclient;"
-						pushClient = [[SMPushClient alloc] initWithAPIVersion:@"0" 
-								publicKey:@"publicKey" privateKey:@"privateKey"];
-
-						[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-    							(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | 
-    							UIRemoteNotificationTypeSound)];
-    					</code></pre>
-    					<pre><code class="brush: objc; highlight: [11,12]">
-    					- (void)application:(UIApplication *)app 
-    						didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-						{
-    						NSString *token = [[deviceToken description] 
-    							stringByTrimmingCharactersInSet:[NSCharacterSet 
-    									characterSetWithCharactersInString:@"<>"]];
-    						
-    						token = [[token componentsSeparatedByString:@" "] 
-    											componentsJoinedByString:@""];
-    						
-    						[pushClient registerDeviceToken:token withUser:@"randomuser" 
-    							onSuccess:createdSuccessBlock onFailure:createdFailureBlock];
-						}
-						</code></pre>
+						<h2>Let's Build HollaGram!</h2>
+						<img width="300px" src="https://dl.dropbox.com/u/79464649/holla.jpeg"/>
 				</section>
+				
 				<section>
-						<h2>Facebook and Twitter Authentication</h2>
-						<ul>
-							<li class="lineSpace">createUserWithFacebookToken:onSuccess:onFailure:</li>
-							<li class="lineSpace">loginWithFacebookToken:onSuccess:onFailure:</li>
-							<li class="lineSpace">updateFacebookStatusWithMessage:onSuccess:onFailure:</li>
-							<li class="lineSpace">getLoggedInUserFacebookInfoWithOnSuccess:onFailure:</li>
-						</ul>
-						<br/>
-						<br/>
-						<ul>
-							<li class="lineSpace">createUserWithTwitterToken:twitterSecret:onSuccess:onFailure:</li>
-							<li class="lineSpace">loginWithTwitterToken:twitterSecret:onSuccess:onFailure:</li>
-							<li class="lineSpace">updateTwitterStatusWithMessage:onSuccess:onFailure:</li>
-							<li class="lineSpace">getLoggedInUserTwitterInfoOnSuccess:onFailure:</li>
-						</ul>
-				</section>
-				<section>
-					
+
 					<section>
 						<h2>Even more flexibility: Custom Code</h2>
-						<ul>
-							<li class="moreLineSpace big50">Java/Scala Server Side SDK.</li>
-							<li class="moreLineSpace big50">Write Code - StackMob REST-ifies it.</li>
-							<li class="moreLineSpace big50">iOS can execute your server code via REST API!</li>
-							<li class="moreLineSpace big50">iOS receives your custom JSON response too.</li>
-						</ul>
+						<pre><code class="brush: java">
+//Java
+public class HelloWorldExample implements CustomCodeMethod {
+  
+  @Override
+  public String getMethodName() {
+    return "hello_world";
+  }
+  
+  @Override
+  public ResponseToProcess execute(...) {
+     
+    // Do fancy server side things
+    
+  }
+}
+</code></pre>
 					</section>
-					
+						
 					<section>
 						<h2>Call Custom Code from iOS App!</h2>
 						<pre><code class="brush: objc;">
@@ -761,88 +332,17 @@
 						];
 						</code></pre>						
 					</section>
-											
-					<section>
-						<h2>Custom Code Example</h2>
-						
-<pre><code class="brush: java">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  
-  @Override
-  public String getMethodName() {
-    return "hello_world";
-  }
-  
-  @Override
-  public ResponseToProcess execute(...) {
-     
-    //Do fancy server side things
-    
-    Map&lt;String, String&gt; json = 
-    	new HashMap&lt;String, String&gt;();
-    json.put("msg", "hello world!");
-    return new ResponseToProcess(..., json);
-  }
-}
-</code></pre>						
-					</section>	
-					
-					<section>
-						<h2>Defines your REST endpoint</h2>
-						<p><code>http://api.mob1.stackmob.com/hello_world</code></p>
-<pre><code class="brush: java; highlight: [6]">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  
-  @Override
-  public String getMethodName() {
-    return "hello_world";
-  }
-  
-  ...
-}
-</code></pre>							
-					</section>
-						
-					<section>
-						<h2>Defines your return JSON</h2>
-						<p><code>{ msg: "hello world!" }</code></p>
-<pre><code class="brush: java; highlight: [11]">
-//Java
-public class HelloWorldExample implements CustomCodeMethod {
-  ...
-   @Override
-  public ResponseToProcess execute(...) {
-     
-    //Do fancy server side things
-    
-    Map&lt;String, String&gt; json = 
-    	new HashMap&lt;String, String&gt;();
-    json.put("msg", "hello world!");
-    return new ResponseToProcess(..., json);
-  }
-}
-</code></pre>							
-					</section>	
 						
 				</section>
 				
 				<section>
 					<h2>Development &amp; Production Environments</h2>
-					<ul>
-						<li class="moreLineSpace big50">Different databases.</li>
-						<li class="moreLineSpace big50">Only deploy when you're ready!</li>
-						<li class="moreLineSpace big50">Easy rollout/rollback.</li>
-					</ul>
+					<img width="500px" src="https://dl.dropbox.com/u/79464649/deployToProd.png" />
 				</section>
 				
 				<section>
 					<h2>API Versions</h2>
-					<ul>
-						<li class="moreLineSpace big50">Backwards support old clients.</li>
-						<li class="moreLineSpace big50">Concurrently run different versions of your custom code/schemas.</li>
-					</ul>
+					<img width="500px" src="https://dl.dropbox.com/u/79464649/apiVersions.png" />
 				</section>
 				
 				<section>
@@ -854,49 +354,13 @@ public class HelloWorldExample implements CustomCodeMethod {
 					</ul>
 				</section>
 				
+				<!--
 				<section>
 						<h2>The future of the iOS SDK</h2>
 						<img height=500px src="https://dl.dropbox.com/u/79464649/future.jpg" />
 							
 				</section>
-				
-				<section>
-						<h2>Open Sourced SDKs</h2>
-						
-						<ul>
-							<li class="moreLineSpace big50">iOS</li>
-							<li class="moreLineSpace big50">Android</li>
-							<li class="moreLineSpace big50">Javascript</li>
-							<li class="moreLineSpace big50">Download them today!</li>
-						</ul>		
-				</section>
-				
-				<section>
-					<h2>Adding a backend with StackMob</h2>
-					<ul>
-						<li class="moreLineSpace big50">Simple.</li>
-						<li class="moreLineSpace big50">Seamless.</li>
-						<li class="moreLineSpace big50">Flexible.</li>
-						<li class="moreLineSpace big50">Powerful.</li>
-						<li class="moreLineSpace big50">Free &rarr; Grow.</li>
-					</ul>
-				</section>	
-				
-				<section>
-						<h2>Backend Services</h2>
-						<ul>
-							<li class="lineSpace">User Authentication</li>
-							<li class="lineSpace">Datastore</li>
-							<li class="lineSpace">Security</li>
-							<li class="lineSpace">GeoSpatial</li>
-							<li class="lineSpace">Push</li>
-							<li class="lineSpace">Hosting</li>
-							<li class="lineSpace">Social Integration</li>
-							<li class="lineSpace">Custom Server Side Code</li>
-							<li class="lineSpace">Analytics</li>
-							<li class="lineSpace">...</li>
-						</ul>
-				</section>
+			-->
 				
 				<section>
 						<h2>Thank you!</h2>
@@ -905,25 +369,21 @@ public class HelloWorldExample implements CustomCodeMethod {
 				</section>
 					
 				<section>
-					<h2>Try it out!</h2>
+					<p class="big50">Slides @ <a class=" big50" href="http://bit.ly/OKbXHM">http://bit.ly/OKbXHM</a></p>
+					<br/>
+					<h3>Try out the demo and StackMob!</h3>
+					<a class="lineSpace big50" href="https://github.com/msv/hollagram-ios">https://github.com/msv/hollagram-ios</a>
+					<br/>
+					<br/>
 					<a class="lineSpace big50" href="https://developer.stackmob.com">https://developer.stackmob.com</a>
 					<br/>
 					<br/>
-					<h2>Get the Slides</h2>
-					<a class="lineSpace big50" href="http://bit.ly/OKbXHM">http://bit.ly/OKbXHM</a>
+					<h3>Free Core Data eBook!</h3>
+					<a class="lineSpace big50" href="http://go.stackmob.com/learncoredata.html">http://go.stackmob.com/learncoredata.html</a>
+					<br/>
+					<br/>
+					<p class="lineSpace">Matt Vaznaian | matt@stackmob.com | @_mattvaz</p>
 					
-				</section>
-				
-				<section>
-					<h2>Acknowledgements</h2>
-					<ul>
-						<li>Reveal.js and Styles - Hakim El Hattab </li>
-						<li>MySQL, Oracle, AWS, Dell, Intel, Google App Engine, Heroku - Google Images</li>
-						<li>Head In Hands, Awesome Note, Dr. Evil, Holding Hands, Future - Google Images</li>
-						<li>Cookie Monster - Sesame Street</li>
-						<li>Calvin &amp; Hobbes - Bill Watterson</li>
-						
-					</ul>
 				</section>
 
 			</div>
